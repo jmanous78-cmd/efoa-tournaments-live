@@ -369,19 +369,35 @@ def parse_eefoa_api(year):
             start_d=start_dt.date()
         except Exception:
             continue
+        if start_d < datetime.now(TZ).date()-timedelta(days=14):
+            continue
+        if not g["categories"]:
+            continue
         registration=None; proclamation=None
         for key,txt in g["links"]:
-            full=urljoin("https://e-efoa.gr/admin/",txt)
+            if txt.startswith("/"):
+                full="https://e-efoa.gr/admin"+txt
+            else:
+                full=urljoin("https://e-efoa.gr/admin/",txt)
             if "ΔΗΛΩΣ" in key.upper(): registration=full
             if "ΠΡΟΚΗΡ" in key.upper(): proclamation=full
         sign_text=" ".join(g["qsign"]+g["msign"])
+        tm=re.search(r"(\d{1,2})\s*(?:Η|ΗΣ)?(?:\s*ΕΒΔΟΜΑΔ)?\s*\((ΙΑ|ΣΤ|[Α-Θ])\)", g["title"].upper())
+        week=int(tm.group(1)) if tm else None
+        union=f"{tm.group(2)}΄ Ένωση" if tm else ""
+        if week:
+            _, week_end=iso_week_range(year,week)
+            end_d=max(start_d,week_end)
+        else:
+            end_d=start_d
         out.append({
             "id":f"eefoa-{tid}",
             "level":g["level"],"title":g["title"],
             "categories":sorted(g["categories"]),
-            "union":"","unions":[],
-            "start":start_d.isoformat(),"end":start_d.isoformat(),
-            "date_precision":"eefoa-start",
+            "union":union,"unions":[union] if union else [],
+            "week":week,
+            "start":start_d.isoformat(),"end":end_d.isoformat(),
+            "date_precision":"eefoa-start/week-end" if week else "eefoa-start",
             "venue":g["club"],"city":"","lat":None,"lon":None,
             "deadline":deadline_from_text(sign_text,start_d),
             "status":"confirmed","source_url":EEFOA,
@@ -486,7 +502,19 @@ def merge_records(primary, enrichers, old):
         if match:
             match["categories"]=sorted(set(match.get("categories",[]))|set(e.get("categories",[])))
             if not match.get("deadline") and e.get("deadline"):match["deadline"]=e["deadline"]
-            if not match.get("venue") and e.get("venue"):match["venue"]=e["venue"]
+            if e.get("source")=="e-efoa-api":
+                if e.get("venue"): match["venue"]=e["venue"]
+                if e.get("registration_url"): match["registration_url"]=e["registration_url"]
+                if match.get("date_precision")=="week" and e.get("start"):
+                    try:
+                        es=date.fromisoformat(e["start"])
+                        ms=date.fromisoformat(match["start"]); me=date.fromisoformat(match["end"])
+                        if ms <= es <= me:
+                            match["start"]=e["start"]
+                            match["date_precision"]="eefoa-start/week-end"
+                    except Exception: pass
+            elif not match.get("venue") and e.get("venue"):
+                match["venue"]=e["venue"]
             match.setdefault("sources",[])
             if e.get("source_url") not in match["sources"]:match["sources"].append(e.get("source_url"))
         else:
@@ -502,6 +530,16 @@ def merge_records(primary, enrichers, old):
                 x[fld]=prev[fld]
         if not x.get("deadline") and prev.get("deadline"):
             x["deadline"]=prev["deadline"]
+        if x.get("source")=="e-efoa-api" and prev.get("status")=="planned" and prev.get("start") and prev.get("end"):
+            try:
+                ps=date.fromisoformat(prev["start"]); pe=date.fromisoformat(prev["end"])
+                xs=date.fromisoformat(x["start"])
+                if ps <= xs <= pe:
+                    x["start"],x["end"]=prev["start"],prev["end"]
+                    x["date_precision"]="annual-program+eefoa"
+                    if prev.get("union") and not x.get("union"):
+                        x["union"],x["unions"]=prev["union"],prev.get("unions",[])
+            except Exception: pass
         if x.get("date_precision")=="week" and prev.get("start") and prev.get("end"):
             try:
                 ps=date.fromisoformat(prev["start"]); pe=date.fromisoformat(prev["end"])
@@ -577,12 +615,9 @@ def main():
     except Exception as ex:
         e12=[];errors.append(f"EFOA news: {ex}")
     ee,api_diag=parse_eefoa_api(year)
-    if ee:
-        diag={"api":api_diag}
-    else:
-        ee,play_diag=parse_eefoa_with_playwright(year)
-        diag={"api":api_diag,"browser":play_diag}
-        if play_diag.get("error"):errors.append(f"e-EFOA browser: {play_diag['error']}")
+    diag={"api":api_diag}
+    if not ee:
+        errors.append("e-EFOA API returned no recent domestic junior E1/E2/E3 records")
     sources.append(EEFOA)
 
     primary=e3+e12
