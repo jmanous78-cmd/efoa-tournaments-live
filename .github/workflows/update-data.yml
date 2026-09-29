@@ -40,4 +40,5 @@ jobs:
           git add data/tournaments.json data/efoa-tournaments.ics data/geocode-cache.json
           git diff --cached --quiet && exit 0
           git commit -m "Update EFOA tournament data"
+          git pull --rebase origin main
           git push origin main
