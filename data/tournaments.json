@@ -1,11 +1,12 @@
 {
   "meta": {
-    "updated_at": "2026-09-29T20:17:47+03:00",
+    "updated_at": "2026-09-29T20:19:08+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
       "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
       "https://efoa.gr/ta-athlemata-mas/tenis/teleutaia-nea-tennis",
+      "https://efoa.gr/component/tags/tag/prokiryksi",
       "https://e-efoa.gr/admin/tournamentsview/list"
     ],
     "schema_version": 3,
@@ -248,8 +249,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "location_source": "official-efoa-address+nominatim"
+      ]
     },
     {
       "id": "e3-2026-w39-41bd75a57b2f",
@@ -344,8 +344,7 @@
       "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
       "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api",
-      "location_source": "official-efoa-address+nominatim"
+      "source": "e-efoa-api"
     },
     {
       "id": "e3-2026-w40-8707115edc56",
@@ -377,8 +376,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "location_source": "official-efoa-address+nominatim"
+      ]
     },
     {
       "id": "e3-2026-w40-09146c442d92",
@@ -408,8 +406,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "location_source": "official-efoa-address+nominatim"
+      ]
     },
     {
       "id": "e3-2026-w40-984fc27e74bd",
@@ -511,8 +508,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "location_source": "official-efoa-address+nominatim"
+      ]
     },
     {
       "id": "e1-5-2026",
