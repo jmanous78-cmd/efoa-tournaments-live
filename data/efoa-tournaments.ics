@@ -5,7 +5,7 @@ CALSCALE:GREGORIAN
 X-WR-CALNAME:ΕΦΟΑ Tournament Deadlines
 BEGIN:VEVENT
 UID:e3-2026-w39-b49a555fbcb5@efoa-live
-DTSTAMP:20260929T170403Z
+DTSTAMP:20260929T170840Z
 DTSTART:20260923T120000Z
 SUMMARY:Deadline δηλώσεων: Ε3 39ης εβδομάδας – ΣΤ΄ Ένωση
 URL:https://e-efoa.gr/admin/tournamentsview/list
@@ -22,7 +22,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:e3-2026-w40-300baf7c04c2@efoa-live
-DTSTAMP:20260929T170403Z
+DTSTAMP:20260929T170840Z
 DTSTART:20260930T120000Z
 SUMMARY:Deadline δηλώσεων: Ε3 40ης εβδομάδας – ΣΤ΄ Ένωση
 URL:https://e-efoa.gr/admin/tournamentsview/list
