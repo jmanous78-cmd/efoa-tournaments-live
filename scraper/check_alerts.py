@@ -12,6 +12,19 @@ STATE=ROOT/"data/alert-state.json"
 PENDING=ROOT/"data/pending-alerts.json"
 NEXT=ROOT/"data/alert-state-next.json"
 
+DEADLINE_TYPES={
+    "registration":{
+        "field":"registration_deadline",
+        "label":"εγγραφής / δήλωσης",
+        "title":"Εγγραφή / δήλωση"
+    },
+    "payment":{
+        "field":"payment_deadline",
+        "label":"πληρωμής",
+        "title":"Πληρωμή"
+    }
+}
+
 def load(path, default):
     try:return json.loads(path.read_text(encoding="utf-8"))
     except Exception:return default
@@ -31,21 +44,24 @@ def event_markdown(e, kind, extra=""):
     cats=", ".join(e.get("categories") or [])
     place=" · ".join(x for x in [e.get("venue"),e.get("city")] if x)
     links=[]
-    if e.get("registration_url"):links.append(f"[Δηλώσεις]({e['registration_url']})")
+    if e.get("registration_url"):links.append(f"[e-ΕΦΟΑ]({e['registration_url']})")
     if e.get("proclamation_url"):links.append(f"[Προκήρυξη]({e['proclamation_url']})")
     if e.get("source_url"):links.append(f"[Πηγή]({e['source_url']})")
-    return "\n".join([
+    rows=[
         f"### {kind}",
         f"**{e.get('title','Τουρνουά')}**",
         f"- Επίπεδο: **{e.get('level','—')}**",
         f"- Κατηγορίες: **{cats or 'προς επιβεβαίωση'}**",
         f"- Αγώνες: **{fmt_date(e.get('start'))} – {fmt_date(e.get('end'))}**",
         f"- Έδρα: **{place or 'προς ανακοίνωση'}**",
-        *( [f"- Deadline: **{fmt_date(e.get('deadline'))}**"] if e.get("deadline") else [] ),
-        *( [f"- {extra}"] if extra else [] ),
-        "",
-        " · ".join(links)
-    ])
+    ]
+    if e.get("registration_deadline"):
+        rows.append(f"- 📝 Λήξη εγγραφής / δήλωσης: **{fmt_date(e['registration_deadline'])}**")
+    if e.get("payment_deadline"):
+        rows.append(f"- 💳 Λήξη πληρωμής: **{fmt_date(e['payment_deadline'])}**")
+    if extra:rows.append(f"- {extra}")
+    rows += [""," · ".join(links)]
+    return "\n".join(rows)
 
 def main():
     cfg=load(CONFIG,{})
@@ -54,6 +70,7 @@ def main():
     now=datetime.now(tz)
     cats=set(cfg.get("categories") or [])
     levels=set(cfg.get("levels") or ["E1","E2","E3"])
+    types=[t for t in (cfg.get("deadline_types") or ["registration","payment"]) if t in DEADLINE_TYPES]
     thresholds=sorted({int(x) for x in (cfg.get("deadline_hours") or [72,24])}, reverse=True)
 
     relevant=[]
@@ -65,14 +82,18 @@ def main():
         except Exception:continue
         relevant.append(e)
 
-    state=load(STATE,{})
-    bootstrap=not bool(state)
-    known=set(state.get("known_events") or [])
-    deadlines=dict(state.get("deadlines") or {})
-    sent={k:set(v) for k,v in (state.get("sent_thresholds") or {}).items()}
-    alerts=[]
+    old_state=load(STATE,{})
+    known=set(old_state.get("known_events") or [])
+    # Schema v2 separates registration/payment. Legacy generic deadline state is
+    # deliberately not reused because it could represent the wrong deadline type.
+    state_v2=old_state.get("schema_version")==2
+    stored_deadlines=old_state.get("deadlines") if state_v2 else {}
+    stored_sent=old_state.get("sent_thresholds") if state_v2 else {}
+    deadlines={t:dict((stored_deadlines or {}).get(t) or {}) for t in types}
+    sent={t:{k:set(v) for k,v in ((stored_sent or {}).get(t) or {}).items()} for t in types}
+    bootstrap=not bool(old_state)
 
-    # On first run, existing tournaments are baseline; don't flood with "new" alerts.
+    alerts=[]
     if bootstrap:
         known.update(e["id"] for e in relevant)
 
@@ -86,49 +107,59 @@ def main():
             })
         known.add(eid)
 
-        dl=e.get("deadline")
-        old_dl=deadlines.get(eid)
-        if dl and old_dl and dl != old_dl:
-            alerts.append({
-                "key":f"deadline-change:{eid}:{dl}",
-                "title":f"⏰ Αλλαγή deadline · {e.get('title','ΕΦΟΑ')}",
-                "markdown":event_markdown(e,"Άλλαξε η προθεσμία δηλώσεων",f"Προηγούμενο deadline: {fmt_date(old_dl)}")
-            })
-            sent[eid]=set()
-        elif dl and not old_dl and not bootstrap:
-            alerts.append({
-                "key":f"deadline-new:{eid}:{dl}",
-                "title":f"⏰ Νέο deadline · {e.get('title','ΕΦΟΑ')}",
-                "markdown":event_markdown(e,"Δημοσιεύτηκε προθεσμία δηλώσεων")
-            })
-        if dl:
-            deadlines[eid]=dl
+        for dtype in types:
+            meta=DEADLINE_TYPES[dtype]
+            dl=e.get(meta["field"])
+            if not dl:continue
+            old_dl=deadlines[dtype].get(eid)
             try:h=(datetime.fromisoformat(dl).astimezone(tz)-now).total_seconds()/3600
             except Exception:h=None
-            if h is not None and h >= 0:
-                eligible=sorted([t for t in thresholds if h <= t])
-                # Send only the most urgent threshold currently crossed.
-                if eligible:
-                    threshold=min(eligible)
-                    already=sent.setdefault(eid,set())
-                    if threshold not in already:
-                        label=f"Λήξη δηλώσεων σε ≤{threshold} ώρες"
-                        alerts.append({
-                            "key":f"threshold:{eid}:{threshold}:{dl}",
-                            "title":f"🚨 {label} · {e.get('title','ΕΦΟΑ')}",
-                            "markdown":event_markdown(e,label)
-                        })
-                        already.add(threshold)
+
+            changed=bool(old_dl and old_dl!=dl)
+            new_typed=not old_dl
+
+            # Only notify a newly separated deadline if it is still actionable.
+            if changed and h is not None and h>=0:
+                alerts.append({
+                    "key":f"{dtype}-change:{eid}:{dl}",
+                    "title":f"⏰ Αλλαγή προθεσμίας {meta['label']} · {e.get('title','ΕΦΟΑ')}",
+                    "markdown":event_markdown(e,f"Άλλαξε η προθεσμία {meta['label']}",f"Προηγούμενη: {fmt_date(old_dl)}")
+                })
+                sent[dtype][eid]=set()
+
+            deadlines[dtype][eid]=dl
+            if h is None or h<0:
+                continue
+
+            eligible=sorted([t for t in thresholds if h<=t])
+            threshold=min(eligible) if eligible else None
+            already=sent[dtype].setdefault(eid,set())
+
+            if threshold is not None and threshold not in already:
+                label=f"Λήξη {meta['label']} σε ≤{threshold} ώρες"
+                alerts.append({
+                    "key":f"{dtype}-threshold:{eid}:{threshold}:{dl}",
+                    "title":f"🚨 {meta['title']} σε ≤{threshold} ώρες · {e.get('title','ΕΦΟΑ')}",
+                    "markdown":event_markdown(e,label)
+                })
+                already.add(threshold)
+            elif new_typed and state_v2 and not bootstrap:
+                alerts.append({
+                    "key":f"{dtype}-new:{eid}:{dl}",
+                    "title":f"⏰ Νέα προθεσμία {meta['label']} · {e.get('title','ΕΦΟΑ')}",
+                    "markdown":event_markdown(e,f"Δημοσιεύτηκε προθεσμία {meta['label']}")
+                })
 
     next_state={
+        "schema_version":2,
         "known_events":sorted(known),
         "deadlines":deadlines,
-        "sent_thresholds":{k:sorted(v) for k,v in sent.items()},
+        "sent_thresholds":{t:{k:sorted(v) for k,v in sent[t].items()} for t in types},
         "categories":sorted(cats)
     }
     save(PENDING,{"generated_at":now.isoformat(timespec="seconds"),"alerts":alerts})
     save(NEXT,next_state)
-    print(json.dumps({"alerts":len(alerts),"bootstrap":bootstrap,"relevant":len(relevant)},ensure_ascii=False))
+    print(json.dumps({"alerts":len(alerts),"bootstrap":bootstrap,"state_migrated":not state_v2,"relevant":len(relevant)},ensure_ascii=False))
 
 if __name__=="__main__":
     main()
