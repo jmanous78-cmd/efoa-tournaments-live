@@ -1,0 +1,47 @@
+name: Favorite tournament alerts
+
+on:
+  schedule:
+    - cron: '7 * * * *'
+  workflow_run:
+    workflows: ["Update EFOA tournament data"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: efoa-alerts
+  cancel-in-progress: false
+
+jobs:
+  alerts:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Sync latest main
+        run: git pull --rebase origin main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Detect alerts
+        run: python scraper/check_alerts.py
+      - name: Publish GitHub notifications
+        run: python scraper/publish_alerts.py
+      - name: Save alert state
+        run: |
+          rm -f data/pending-alerts.json data/alert-state-next.json
+          git config user.name "efoa-alert-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/alert-state.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Update tournament alert state"
+          git push origin main
