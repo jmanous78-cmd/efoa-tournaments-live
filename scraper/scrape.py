@@ -76,10 +76,7 @@ def categories_from_text(s):
     ages = [int(x) for x in re.findall(r"(?<!\d)(10|12|14|16|18)(?!\d)", t)]
     out = []
     for age in ages:
-        if age == 10:
-            out.append("Μ10")
-        else:
-            out += [f"Α{age}", f"Κ{age}"]
+        out += [f"Α{age}", f"Κ{age}"]
     return list(dict.fromkeys(out))
 
 def parse_level(s):
@@ -161,6 +158,7 @@ def proclamation_details(url, year, fallback_start=None):
     start, end = rng if rng else (fallback_start, None)
     return {
         "pdf_text_ok": True,
+        "date_found": bool(rng),
         "start": start.isoformat() if start else None,
         "end": end.isoformat() if end else None,
         "deadline": deadline_from_text(txt, start),
@@ -218,7 +216,7 @@ def parse_e3_page(year):
                 "week": week,
                 "start": start,
                 "end": end,
-                "date_precision": "proclamation" if details.get("start") else "week",
+                "date_precision": "proclamation" if details.get("date_found") else "week",
                 "venue": venue,
                 "city": "",
                 "lat": None, "lon": None,
@@ -253,8 +251,10 @@ def parse_e1e2_articles(year):
         try:
             r=http_get(url); r.raise_for_status()
             soup=BeautifulSoup(r.text,"lxml")
-            title=clean((soup.find("h1") or soup.find("h2") or soup.find("h3")).get_text(" ",strip=True)) if (soup.find("h1") or soup.find("h2") or soup.find("h3")) else list_title
-            body=clean(soup.get_text(" ",strip=True))
+            title=list_title
+            article=soup.find("article") or soup.select_one(".item-page") or soup.select_one("main")
+            scope=article or soup
+            body=clean(scope.get_text(" ",strip=True))
         except Exception:
             continue
         if str(year) not in body and str(year) not in title:
@@ -267,7 +267,9 @@ def parse_e1e2_articles(year):
         if rng: start_d,end_d=rng
         elif week: start_d,end_d=iso_week_range(year,week)
         else: continue
-        links=[urljoin(url,a["href"]) for a in soup.find_all("a",href=True) if "drive.google.com" in a["href"] or a["href"].lower().endswith(".pdf")]
+        if end_d < datetime.now(TZ).date()-timedelta(days=14):
+            continue
+        links=[urljoin(url,a["href"]) for a in scope.find_all("a",href=True) if "drive.google.com" in a["href"] or a["href"].lower().endswith(".pdf")]
         pdf_details=[proclamation_details(x,year,start_d) for x in links[:6]]
         cats=set()
         deadlines=[]
@@ -316,6 +318,80 @@ def date_from_row(cells, year):
     if ds:
         return min(ds),max(ds)
     return None
+
+def parse_eefoa_api(year):
+    """Read the public OData-style endpoint discovered from the e-EFOA grid."""
+    base="https://e-efoa.gr/api/v1/tournamentsview"
+    diagnostics={"queries":[]}
+    payload=None
+    chosen=None
+    # Probe variants once; null normally gives the broadest public year view.
+    for current in ("null","1","0"):
+        url=f"{base}(year={year},current={current},grade=null,organizer=null,group=null,club=null)"
+        try:
+            r=http_get(url,params={"$top":500,"$count":"true"})
+            obj=r.json() if r.ok else {}
+            count=obj.get("@odata.count", len(obj.get("value",[]))) if isinstance(obj,dict) else 0
+            diagnostics["queries"].append({"current":current,"status":r.status_code,"count":count})
+            if isinstance(obj,dict) and obj.get("value") and (payload is None or count > len(payload.get("value",[]))):
+                payload=obj;chosen=current
+        except Exception as ex:
+            diagnostics["queries"].append({"current":current,"error":str(ex)})
+    diagnostics["chosen_current"]=chosen
+    if not payload:
+        return [],diagnostics
+
+    grouped={}
+    for row in payload.get("value",[]):
+        title=clean(row.get("TournamentTitle"))
+        organizer=clean(row.get("OrganizerName"))
+        level=parse_level(title+" "+organizer)
+        if level not in {"E1","E2","E3"}:
+            continue
+        tid=str(row.get("TournamentId") or stable_id(title,row.get("TournamentDetailsMStartDate")))
+        g=grouped.setdefault(tid,{
+            "rows":[],"title":title,"level":level,"club":clean(row.get("Club")),
+            "start_raw":row.get("TournamentDetailsMStartDate"),"categories":set(),
+            "links":[],"qsign":[],"msign":[]
+        })
+        g["categories"].update(categories_from_text(row.get("Group","")))
+        g["rows"].append(row)
+        g["qsign"].append(clean(row.get("QSignIn")))
+        g["msign"].append(clean(row.get("MSignIn")))
+        for link in row.get("Links") or []:
+            txt=clean(link.get("Text"))
+            if txt:g["links"].append((clean(link.get("Key")),txt))
+
+    out=[]
+    for tid,g in grouped.items():
+        try:
+            start_dt=datetime.fromisoformat(str(g["start_raw"]))
+            start_d=start_dt.date()
+        except Exception:
+            continue
+        registration=None; proclamation=None
+        for key,txt in g["links"]:
+            full=urljoin("https://e-efoa.gr/admin/",txt)
+            if "ΔΗΛΩΣ" in key.upper(): registration=full
+            if "ΠΡΟΚΗΡ" in key.upper(): proclamation=full
+        sign_text=" ".join(g["qsign"]+g["msign"])
+        out.append({
+            "id":f"eefoa-{tid}",
+            "level":g["level"],"title":g["title"],
+            "categories":sorted(g["categories"]),
+            "union":"","unions":[],
+            "start":start_d.isoformat(),"end":start_d.isoformat(),
+            "date_precision":"eefoa-start",
+            "venue":g["club"],"city":"","lat":None,"lon":None,
+            "deadline":deadline_from_text(sign_text,start_d),
+            "status":"confirmed","source_url":EEFOA,
+            "proclamation_url":proclamation,
+            "registration_url":registration or EEFOA,
+            "source":"e-efoa-api"
+        })
+    diagnostics["domestic_records"]=len(out)
+    diagnostics["sample_titles"]=[x["title"] for x in out[:10]]
+    return out,diagnostics
 
 def parse_eefoa_with_playwright(year):
     """Render the public JS grid. Returns conservative records plus diagnostics."""
@@ -416,6 +492,26 @@ def merge_records(primary, enrichers, old):
         else:
             result.append(e)
 
+    # Reuse previously verified metadata when a fresh source is less precise.
+    for x in result:
+        prev=next((o for o in old if same_event(o,x)),None)
+        if not prev:
+            continue
+        for fld in ("lat","lon","city"):
+            if (x.get(fld) is None or x.get(fld)=="") and prev.get(fld) not in (None,""):
+                x[fld]=prev[fld]
+        if not x.get("deadline") and prev.get("deadline"):
+            x["deadline"]=prev["deadline"]
+        if x.get("date_precision")=="week" and prev.get("start") and prev.get("end"):
+            try:
+                ps=date.fromisoformat(prev["start"]); pe=date.fromisoformat(prev["end"])
+                xs=date.fromisoformat(x["start"]); xe=date.fromisoformat(x["end"])
+                if xs <= ps <= pe <= xe:
+                    x["start"],x["end"]=prev["start"],prev["end"]
+                    x["date_precision"]="previous-confirmed"
+            except Exception:
+                pass
+
     # Preserve future manually/planned entries that live sources have not announced yet.
     today=datetime.now(TZ).date()
     for o in old:
@@ -480,8 +576,13 @@ def main():
         e12=parse_e1e2_articles(year);sources.append(NEWS)
     except Exception as ex:
         e12=[];errors.append(f"EFOA news: {ex}")
-    ee,diag=parse_eefoa_with_playwright(year)
-    if diag.get("error"):errors.append(f"e-EFOA browser: {diag['error']}")
+    ee,api_diag=parse_eefoa_api(year)
+    if ee:
+        diag={"api":api_diag}
+    else:
+        ee,play_diag=parse_eefoa_with_playwright(year)
+        diag={"api":api_diag,"browser":play_diag}
+        if play_diag.get("error"):errors.append(f"e-EFOA browser: {play_diag['error']}")
     sources.append(EEFOA)
 
     primary=e3+e12
