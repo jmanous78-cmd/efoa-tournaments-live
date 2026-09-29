@@ -22,6 +22,7 @@ CACHE = ROOT / "data/geocode-cache.json"
 TZ = ZoneInfo("Europe/Athens")
 EEFOA = "https://e-efoa.gr/admin/tournamentsview/list"
 NEWS = "https://efoa.gr/ta-athlemata-mas/tenis/teleutaia-nea-tennis"
+PROCLAMATION_TAG = "https://efoa.gr/component/tags/tag/prokiryksi"
 UA = "EFOA-Tournament-Explorer/2.0 (+https://github.com/jmanous78-cmd/efoa-tournaments-live)"
 
 # Official EFOA club-address aliases for abbreviations commonly used in tournament listings.
@@ -244,8 +245,9 @@ def parse_e3_page(year):
 
 def article_links():
     found = {}
-    for start in range(0, 91, 15):
-        url = NEWS if start == 0 else f"{NEWS}?start={start}"
+    listing_urls=[PROCLAMATION_TAG, NEWS]
+    listing_urls += [f"{NEWS}?start={start}" for start in range(15,91,15)]
+    for url in listing_urls:
         try:
             r=http_get(url); r.raise_for_status()
             soup=BeautifulSoup(r.text,"lxml")
@@ -593,8 +595,10 @@ def geocode(events):
             akey=ascii_key(alias)
             if akey==vkey or akey in vkey or vkey in akey:
                 hint=(address,city);break
-        q=hint[0] if hint else f"{venue}, Ελλάδα"
-        if hint and not e.get("city"):
+        if not hint:
+            continue
+        q=hint[0]
+        if not e.get("city"):
             e["city"]=hint[1]
         key="ADDR:"+ascii_key(q)
         if key in cache:
@@ -602,7 +606,7 @@ def geocode(events):
         else:
             try:
                 time.sleep(1.05)
-                r=http_get("https://nominatim.openstreetmap.org/search",params={"q":q,"format":"jsonv2","limit":1,"addressdetails":1})
+                r=requests.get("https://nominatim.openstreetmap.org/search",params={"q":q,"format":"jsonv2","limit":1,"addressdetails":1},headers={"User-Agent":UA},timeout=12)
                 arr=r.json() if r.ok else []
                 g=arr[0] if arr else None
             except Exception:g=None
@@ -639,7 +643,7 @@ def main():
     except Exception as ex:
         e3=[];errors.append(f"EFOA E3 page: {ex}")
     try:
-        e12=parse_e1e2_articles(year);sources.append(NEWS)
+        e12=parse_e1e2_articles(year);sources.extend([NEWS,PROCLAMATION_TAG])
     except Exception as ex:
         e12=[];errors.append(f"EFOA news: {ex}")
     ee,api_diag=parse_eefoa_api(year)
