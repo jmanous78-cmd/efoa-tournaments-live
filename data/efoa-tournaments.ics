@@ -4,10 +4,27 @@ PRODID:-//EFOA Tournament Explorer//EL
 CALSCALE:GREGORIAN
 X-WR-CALNAME:ΕΦΟΑ Tournament Deadlines
 BEGIN:VEVENT
-UID:e3-z-40-2026@efoa-live
-DTSTAMP:20260929T170111Z
-DTSTART:20260929T120000Z
-SUMMARY:Deadline δηλώσεων: Ε3 Open 40ης – Ζ΄ Ένωση
+UID:e3-2026-w39-b49a555fbcb5@efoa-live
+DTSTAMP:20260929T170403Z
+DTSTART:20260923T120000Z
+SUMMARY:Deadline δηλώσεων: Ε3 39ης εβδομάδας – ΣΤ΄ Ένωση
+URL:https://e-efoa.gr/admin/tournamentsview/list
+BEGIN:VALARM
+TRIGGER:-PT72H
+ACTION:DISPLAY
+DESCRIPTION:Λήξη δηλώσεων σε 72 ώρες
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-PT24H
+ACTION:DISPLAY
+DESCRIPTION:Λήξη δηλώσεων σε 24 ώρες
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:e3-2026-w40-300baf7c04c2@efoa-live
+DTSTAMP:20260929T170403Z
+DTSTART:20260930T120000Z
+SUMMARY:Deadline δηλώσεων: Ε3 40ης εβδομάδας – ΣΤ΄ Ένωση
 URL:https://e-efoa.gr/admin/tournamentsview/list
 BEGIN:VALARM
 TRIGGER:-PT72H
