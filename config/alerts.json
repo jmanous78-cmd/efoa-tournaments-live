@@ -1,0 +1,7 @@
+{
+  "categories": ["Α14"],
+  "levels": ["E1", "E2", "E3"],
+  "deadline_hours": [72, 24],
+  "assignee": "jmanous78-cmd",
+  "timezone": "Europe/Athens"
+}
