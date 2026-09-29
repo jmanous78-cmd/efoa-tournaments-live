@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-09-29T21:46:00+03:00",
+    "updated_at": "2026-09-29T21:49:15+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -118,9 +118,7 @@
       "source": "e-efoa-api",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      ]
     },
     {
       "id": "e3-2026-w39-98430ccade48",
@@ -155,9 +153,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      ]
     },
     {
       "id": "e3-2026-w39-075143118946",
@@ -192,9 +188,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      ]
     },
     {
       "id": "e3-2026-w39-b20cf1daeb3b",
@@ -227,9 +221,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      ]
     },
     {
       "id": "e3-2026-w39-8707115edc56",
@@ -262,9 +254,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      ]
     },
     {
       "id": "e3-2026-w39-41bd75a57b2f",
@@ -297,9 +287,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      ]
     },
     {
       "id": "e3-2026-w39-b49a555fbcb5",
@@ -334,9 +322,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      ]
     },
     {
       "id": "eefoa-3708",
@@ -366,9 +352,7 @@
       "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
       "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api",
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      "source": "e-efoa-api"
     },
     {
       "id": "e3-2026-w40-8707115edc56",
@@ -401,9 +385,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      ]
     },
     {
       "id": "e3-2026-w40-09146c442d92",
@@ -434,9 +416,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      ]
     },
     {
       "id": "e3-2026-w40-984fc27e74bd",
@@ -469,9 +449,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      ]
     },
     {
       "id": "e3-2026-w40-300baf7c04c2",
@@ -508,9 +486,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      ]
     },
     {
       "id": "e3-2026-w41-c871b637cd66",
@@ -545,9 +521,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      ]
     },
     {
       "id": "e1-5-2026",
