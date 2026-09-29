@@ -24,6 +24,19 @@ EEFOA = "https://e-efoa.gr/admin/tournamentsview/list"
 NEWS = "https://efoa.gr/ta-athlemata-mas/tenis/teleutaia-nea-tennis"
 UA = "EFOA-Tournament-Explorer/2.0 (+https://github.com/jmanous78-cmd/efoa-tournaments-live)"
 
+# Official EFOA club-address aliases for abbreviations commonly used in tournament listings.
+# They are address hints only; coordinates are resolved by Nominatim and cached.
+VENUE_HINTS = {
+    "ΟΑ ΑΡΤΑΣ": ("Σκουφά 67, 47100 Άρτα, Ελλάδα", "Άρτα"),
+    "ΟΑ ΦΟΙΒΟΣ ΛΑΡΙΣΑΣ": ("Κούμα 44, 41223 Λάρισα, Ελλάδα", "Λάρισα"),
+    "ΟΑ ΦΟΙΒΟΑΣ ΛΑΡΙΣΑΣ": ("Κούμα 44, 41223 Λάρισα, Ελλάδα", "Λάρισα"),
+    "ΤΕΝ ΑΚΑΔ ΚΡΗΤΗΣ": ("Ηρακλή 97, 71305 Ηράκλειο, Ελλάδα", "Ηράκλειο"),
+    "ΤΕΝΙΣΤΙΚΗ ΑΚΑΔΗΜΙΑ ΚΡΗΤΗΣ": ("Ηρακλή 97, 71305 Ηράκλειο, Ελλάδα", "Ηράκλειο"),
+    "ΟΑ ΞΥΛΟΚΑΣΤΡΟΥ ΣΥΘΑΣ": ("Γήπεδα Τένις ΟΑΞ, 20400 Ξυλόκαστρο, Ελλάδα", "Ξυλόκαστρο"),
+    "ΑΟ ΞΥΛΟΚΑΣΤΡΟ ΣΥΘΑΣ": ("Γήπεδα Τένις ΟΑΞ, 20400 Ξυλόκαστρο, Ελλάδα", "Ξυλόκαστρο"),
+    "ΡΟΔΙΑΚΟΣ ΟΑ": ("Καρακόνερο, Ρόδος, Ελλάδα", "Ρόδος"),
+}
+
 MONTHS = {
     "ΙΑΝΟΥΑΡΙΟΥ": 1, "ΦΕΒΡΟΥΑΡΙΟΥ": 2, "ΜΑΡΤΙΟΥ": 3, "ΑΠΡΙΛΙΟΥ": 4,
     "ΜΑΙΟΥ": 5, "ΜΑΪΟΥ": 5, "ΙΟΥΝΙΟΥ": 6, "ΙΟΥΛΙΟΥ": 7, "ΑΥΓΟΥΣΤΟΥ": 8,
@@ -405,6 +418,11 @@ def parse_eefoa_api(year):
             "registration_url":registration or EEFOA,
             "source":"e-efoa-api"
         })
+    templates={}
+    for g in grouped.values():
+        if g["level"] in {"E1","E2","E3"}:
+            templates.setdefault(g["level"],set()).update(g["categories"])
+    diagnostics["category_templates"]={k:sorted(v) for k,v in templates.items()}
     diagnostics["domestic_records"]=len(out)
     diagnostics["sample_titles"]=[x["title"] for x in out[:10]]
     return out,diagnostics
@@ -567,15 +585,24 @@ def geocode(events):
     changed=False
     for e in events:
         if e.get("lat") is not None and e.get("lon") is not None: continue
-        q=clean(e.get("venue"))
-        if not q or "ΑΝΑΚΟΙΝ" in q.upper() or "ΠΡΟΚΗΡΥΞ" in q.upper(): continue
-        key=ascii_key(q)
+        venue=clean(e.get("venue"))
+        if not venue or "ΑΝΑΚΟΙΝ" in venue.upper() or "ΠΡΟΚΗΡΥΞ" in venue.upper(): continue
+        vkey=ascii_key(venue)
+        hint=None
+        for alias,(address,city) in VENUE_HINTS.items():
+            akey=ascii_key(alias)
+            if akey==vkey or akey in vkey or vkey in akey:
+                hint=(address,city);break
+        q=hint[0] if hint else f"{venue}, Ελλάδα"
+        if hint and not e.get("city"):
+            e["city"]=hint[1]
+        key="ADDR:"+ascii_key(q)
         if key in cache:
             g=cache[key]
         else:
             try:
                 time.sleep(1.05)
-                r=http_get("https://nominatim.openstreetmap.org/search",params={"q":f"{q}, Ελλάδα","format":"jsonv2","limit":1,"addressdetails":1})
+                r=http_get("https://nominatim.openstreetmap.org/search",params={"q":q,"format":"jsonv2","limit":1,"addressdetails":1})
                 arr=r.json() if r.ok else []
                 g=arr[0] if arr else None
             except Exception:g=None
@@ -584,6 +611,7 @@ def geocode(events):
             e["lat"]=float(g["lat"]);e["lon"]=float(g["lon"])
             addr=g.get("address") or {}
             e["city"]=e.get("city") or addr.get("city") or addr.get("town") or addr.get("village") or addr.get("municipality") or ""
+            e["location_source"]="official-efoa-address+nominatim" if hint else "nominatim"
     if changed:save_json(CACHE,cache)
 
 def make_ics(events):
@@ -622,6 +650,17 @@ def main():
 
     primary=e3+e12
     events=merge_records(primary,ee,old)
+
+    # A planned E1/E2 can appear in the annual programme before its individual
+    # e-EFOA listing exists. Use the same-year level template only for filtering,
+    # and mark it explicitly as inferred until a live record confirms it.
+    templates=api_diag.get("category_templates",{})
+    for e in events:
+        if e.get("status")=="planned" and not e.get("categories") and e.get("level") in {"E1","E2"}:
+            inferred=templates.get(e["level"]) or []
+            if inferred:
+                e["categories"]=inferred
+                e["categories_status"]="inferred-current-year"
     geocode(events)
     make_ics(events)
     data={
