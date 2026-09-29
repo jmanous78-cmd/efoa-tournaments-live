@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ΕΦΟΑ Live Tournament Explorer</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header><h1>ΕΦΟΑ Live Tournament Explorer</h1><p>Ε1 · Ε2 · Ε3 — κατηγορίες, Ενώσεις, deadlines και χάρτης</p></header>
+<main>
+<section class="card favorites"><div><h2>★ Οι κατηγορίες μου</h2><div id="favorites"></div></div><label class="toggle"><input id="favoritesOnly" type="checkbox"> Μόνο οι κατηγορίες μου</label></section>
+<section id="nextDeadline" class="card hero"></section>
+<section class="card"><h2>Η εβδομάδα μου</h2><div class="week-grid"><div><b id="wEvents">0</b><span>τουρνουά επόμενων 30 ημερών</span></div><div><b id="wDeadlines">0</b><span>ενεργά deadlines</span></div><div><b id="wNearest">—</b><span id="wNearestText">κοντινότερο από Αθήνα</span></div></div></section>
+<section class="card filters">
+<input id="search" placeholder="Αναζήτηση πόλης, συλλόγου, τίτλου…">
+<select id="level"><option value="ALL">Όλα Ε1/Ε2/Ε3</option><option>E1</option><option>E2</option><option>E3</option></select>
+<select id="gender"><option value="ALL">Αγόρια + Κορίτσια + Μικτά</option><option value="A">Αγόρια</option><option value="K">Κορίτσια</option><option value="M">Μικτά</option></select>
+<select id="age"><option value="ALL">Όλες ηλικίες</option><option>10</option><option>12</option><option>14</option><option>16</option><option>18</option></select>
+<select id="union"><option value="ALL">Όλες οι Ενώσεις</option></select>
+<label>Από <input id="from" type="date"></label><label>Έως <input id="to" type="date"></label>
+<select id="deadline"><option value="ALL">Όλα deadlines</option><option value="OPEN">Ενεργές δηλώσεις</option><option value="72">≤72 ώρες</option><option value="24">≤24 ώρες</option><option value="NONE">Χωρίς deadline</option></select>
+<button id="reset">Καθαρισμός</button>
+</section>
+<section class="layout"><div class="card map-card"><div id="map"></div></div><div class="card list-card"><div class="list-head"><h2>Τουρνουά</h2><span id="count"></span></div><div id="list"></div></div></section>
+<footer>Πηγές: e‑ΕΦΟΑ και επίσημες ανακοινώσεις ΕΦΟΑ/Ενώσεων. Η επίσημη προκήρυξη υπερισχύει πάντα.</footer>
+</main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="assets/app.js"></script>
+</body></html>
