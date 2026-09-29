@@ -7,6 +7,13 @@ on:
     workflows: ["Update EFOA tournament data"]
     types: [completed]
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'config/alerts.json'
+      - 'scraper/check_alerts.py'
+      - 'scraper/publish_alerts.py'
+      - '.github/workflows/alerts.yml'
 
 permissions:
   contents: write
