@@ -83,7 +83,8 @@ def categories_from_text(s):
     return list(dict.fromkeys(out))
 
 def parse_level(s):
-    t = ascii_key(s).replace(" ", "")
+    # EFOA uses the Greek epsilon (Ε/ε), while some sources use Latin E.
+    t = ascii_key(s).replace(" ", "").replace("Ε", "E")
     for lev in ("E1", "E2", "E3"):
         if lev in t:
             return lev
@@ -342,6 +343,16 @@ def parse_eefoa_with_playwright(year):
             rows=page.locator("table tbody tr").evaluate_all("""els => els.map(tr => Array.from(tr.querySelectorAll('td')).map(td => td.innerText.trim()).filter(Boolean)).filter(r=>r.length)""")
             diagnostics["rows"]=len(rows)
             diagnostics["samples"]=rows[:8]
+            if json_payloads:
+                def small_sample(obj):
+                    if isinstance(obj, dict):
+                        return {k: small_sample(v) for k,v in list(obj.items())[:12]}
+                    if isinstance(obj, list):
+                        return [small_sample(v) for v in obj[:3]]
+                    if isinstance(obj, str):
+                        return obj[:180]
+                    return obj
+                diagnostics["json_samples"]=[small_sample(x) for x in json_payloads[:3]]
             browser.close()
     except Exception as ex:
         diagnostics["error"]=str(ex)
