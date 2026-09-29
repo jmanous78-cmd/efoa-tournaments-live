@@ -11,6 +11,13 @@
 <header><h1>ΕΦΟΑ Live Tournament Explorer</h1><p>Ε1 · Ε2 · Ε3 — κατηγορίες, Ενώσεις, deadlines και χάρτης</p></header>
 <main>
 <section class="card favorites"><div><h2>★ Οι κατηγορίες μου</h2><div id="favorites"></div></div><label class="toggle"><input id="favoritesOnly" type="checkbox"> Μόνο οι κατηγορίες μου</label></section>
+<section class="card alerts-card">
+  <div><h2>🔔 Ειδοποιήσεις</h2><p id="alertStatus">Έλεγχος κατάστασης ειδοποιήσεων…</p></div>
+  <div class="alert-actions">
+    <button id="enableAlerts">Ενεργοποίηση browser alerts</button>
+    <a id="githubAlerts" target="_blank" href="https://github.com/jmanous78-cmd/efoa-tournaments-live/issues?q=is%3Aissue%20label%3Atournament-alerts">GitHub alerts</a>
+  </div>
+</section>
 <section id="nextDeadline" class="card hero"></section>
 <section class="card"><h2>Η εβδομάδα μου</h2><div class="week-grid"><div><b id="wEvents">0</b><span>τουρνουά επόμενων 30 ημερών</span></div><div><b id="wDeadlines">0</b><span>ενεργά deadlines</span></div><div><b id="wNearest">—</b><span id="wNearestText">κοντινότερο από Αθήνα</span></div></div></section>
 <section class="card filters">
