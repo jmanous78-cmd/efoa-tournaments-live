@@ -1,8 +1,93 @@
 {
   "meta": {
-    "updated_at": "2026-09-29T15:26:05.658Z",
-    "source_status": "seed",
-    "schema_version": 2
+    "updated_at": "2026-09-29T20:00:42+03:00",
+    "source_status": "ok",
+    "errors": [],
+    "sources": [
+      "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
+      "https://efoa.gr/ta-athlemata-mas/tenis/teleutaia-nea-tennis",
+      "https://e-efoa.gr/admin/tournamentsview/list"
+    ],
+    "schema_version": 3,
+    "counts": {
+      "e3": 0,
+      "e1e2": 0,
+      "eefoa": 0,
+      "total": 6
+    },
+    "eefoa_diagnostics": {
+      "rows": 9,
+      "samples": [
+        [
+          "Τουρνουά",
+          "Κατηγορία",
+          "Σύλλογος",
+          "Διοργανωτής",
+          "Q-SignIn",
+          "M-SignIn"
+        ],
+        [
+          "TE (SERRES 26)",
+          "Α14",
+          "ΣΑ ΣΕΡΡΩΝ",
+          "TE",
+          "-",
+          "-"
+        ],
+        [
+          "TE (SERRES 26)",
+          "Α14 Δ",
+          "ΣΑ ΣΕΡΡΩΝ",
+          "TE",
+          "-",
+          "-"
+        ],
+        [
+          "TE (SERRES 26)",
+          "Κ14",
+          "ΣΑ ΣΕΡΡΩΝ",
+          "TE",
+          "-",
+          "-"
+        ],
+        [
+          "TE (SERRES 26)",
+          "Κ14 Δ",
+          "ΣΑ ΣΕΡΡΩΝ",
+          "TE",
+          "-",
+          "-"
+        ],
+        [
+          "ITF (ARIDEA J100 1 26)",
+          "Α18",
+          "ΟΑ ΑΡΙΔΑΙΑΣ",
+          "ITF",
+          "-",
+          "-"
+        ],
+        [
+          "ITF (ARIDEA J100 1 26)",
+          "Α18 Δ",
+          "ΟΑ ΑΡΙΔΑΙΑΣ",
+          "ITF",
+          "-",
+          "-"
+        ],
+        [
+          "ITF (ARIDEA J100 1 26)",
+          "Κ18",
+          "ΟΑ ΑΡΙΔΑΙΑΣ",
+          "ITF",
+          "-",
+          "-"
+        ]
+      ],
+      "json_urls": [
+        "https://e-efoa.gr/auth/srv/.well-known/openid-configuration",
+        "https://e-efoa.gr/api/v1/tournamentsview(year=2026,current=1,grade=null,organizer=null,group=null,club=null)?%24top=8&%24count=true"
+      ]
+    }
   },
   "tournaments": [
     {
@@ -30,33 +115,6 @@
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list"
     },
     {
-      "id": "e3-d-40-2026",
-      "level": "E3",
-      "title": "Ε3 Open 40ης – Δ΄ Ένωση",
-      "categories": [
-        "Α10",
-        "Κ10",
-        "Α12",
-        "Κ12",
-        "Α14",
-        "Κ14"
-      ],
-      "union": "Δ΄ Ένωση",
-      "unions": [
-        "Δ΄ Ένωση"
-      ],
-      "start": "2026-10-03",
-      "end": "2026-10-04",
-      "venue": "ΟΑ Άρτας",
-      "city": "Άρτα",
-      "lat": 39.16,
-      "lon": 20.985,
-      "deadline": null,
-      "status": "confirmed",
-      "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list"
-    },
-    {
       "id": "e3-z-40-2026",
       "level": "E3",
       "title": "Ε3 Open 40ης – Ζ΄ Ένωση",
@@ -81,6 +139,33 @@
       "deadline": "2026-09-29T15:00:00+03:00",
       "status": "confirmed",
       "source_url": "https://www.zenositennis.gr/",
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list"
+    },
+    {
+      "id": "e3-d-40-2026",
+      "level": "E3",
+      "title": "Ε3 Open 40ης – Δ΄ Ένωση",
+      "categories": [
+        "Α10",
+        "Κ10",
+        "Α12",
+        "Κ12",
+        "Α14",
+        "Κ14"
+      ],
+      "union": "Δ΄ Ένωση",
+      "unions": [
+        "Δ΄ Ένωση"
+      ],
+      "start": "2026-10-03",
+      "end": "2026-10-04",
+      "venue": "ΟΑ Άρτας",
+      "city": "Άρτα",
+      "lat": 39.16,
+      "lon": 20.985,
+      "deadline": null,
+      "status": "confirmed",
+      "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list"
     },
     {
