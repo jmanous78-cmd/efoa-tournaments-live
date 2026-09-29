@@ -1,6 +1,7 @@
 const DATA="data/tournaments.json", KEY="efoa-live-v4", ATH={lat:37.9838,lon:23.7275};
 let events=[],map,markers;
-let state={level:"ALL",gender:"ALL",age:"ALL",union:"ALL",from:"",to:"",deadline:"ALL",search:"",favorites:["Α14"],favoritesOnly:true};
+const _now=new Date(), _localToday=new Date(_now.getTime()-_now.getTimezoneOffset()*60000).toISOString().slice(0,10);
+let state={level:"ALL",gender:"ALL",age:"ALL",union:"ALL",from:_localToday,to:"",deadline:"ALL",search:"",favorites:["Α14"],favoritesOnly:true};
 const $=id=>document.getElementById(id), norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase();
 function cats(e){return e.categories||[]}
 function unions(e){return e.unions?.length?e.unions:(e.union?[e.union]:[])}
