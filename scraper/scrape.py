@@ -126,23 +126,78 @@ def numeric_dates(text, fallback_year):
         except ValueError: pass
     return vals
 
-def deadline_from_text(text, event_start=None):
+def _datetime_near_keyword(text, event_start, keyword_pattern, require_limit_word=False):
+    """Return the most plausible dated deadline nearest a semantic keyword."""
     upper = clean(text).upper()
-    snippets = []
-    for m in re.finditer(r"ΔΗΛΩ|ΛΗΞΗ|ΕΓΓΡΑΦ|SIGN.?IN|ENTRY", upper):
-        snippets.append(upper[max(0,m.start()-80):m.start()+260])
     candidates = []
-    for sn in snippets:
-        ds = numeric_dates(sn, (event_start or date.today()).year)
-        for d in ds:
-            tm = re.search(r"(?<!\d)([01]?\d|2[0-3])[:.]([0-5]\d)(?!\d)", sn)
-            hh, mm = (int(tm.group(1)), int(tm.group(2))) if tm else (23, 59)
-            dt = datetime(d.year,d.month,d.day,hh,mm,tzinfo=TZ)
-            if not event_start or d <= event_start:
-                candidates.append(dt)
+    for m in re.finditer(keyword_pattern, upper):
+        lo=max(0,m.start()-140); hi=min(len(upper),m.end()+320)
+        sn=upper[lo:hi]
+        if require_limit_word and not re.search(r"ΛΗΞ|ΜΕΧΡΙ|ΕΩΣ", sn):
+            continue
+        fallback_year=(event_start or date.today()).year
+        # Date/time candidates with their position inside this local context.
+        for dm in re.finditer(r"(?<!\\d)(\\d{1,2})[./-](\\d{1,2})(?:[./-](\\d{2,4}))?", sn):
+            d,mn,y=dm.groups()
+            yy=int(y or fallback_year); yy=2000+yy if yy<100 else yy
+            try: dd=date(yy,int(mn),int(d))
+            except ValueError: continue
+            # Prefer a time close to this date; otherwise default to 15:00 for
+            # EFOA online cutoffs rather than silently using end-of-day.
+            tail=sn[max(0,dm.start()-30):min(len(sn),dm.end()+80)]
+            tm=re.search(r"(?<!\\d)([01]?\\d|2[0-3])[:.]([0-5]\\d)(?!\\d)",tail)
+            hh,mm=(int(tm.group(1)),int(tm.group(2))) if tm else (15,0)
+            dt=datetime(dd.year,dd.month,dd.day,hh,mm,tzinfo=TZ)
+            if event_start and dd>event_start:
+                continue
+            # Character distance makes a date next to the right label win over
+            # another date that happens to occur elsewhere in the same table.
+            dist=abs((lo+dm.start())-m.start())
+            candidates.append((dist,dt))
     if not candidates:
         return None
-    return max(candidates).isoformat(timespec="minutes")
+    candidates.sort(key=lambda x:(x[0],-x[1].timestamp()))
+    return candidates[0][1].isoformat(timespec="minutes")
+
+def deadlines_from_text(text, event_start=None):
+    registration=_datetime_near_keyword(
+        text,event_start,
+        r"ΛΗΞΗ\\s+(?:ΔΗΛΩΣΕΩΝ|ΣΥΜΜΕΤΟΧΩΝ)|ΔΗΛΩΣ(?:Η|ΕΙΣ)\\s+ΣΥΜΜΕΤΟΧ|ΕΓΓΡΑΦ"
+    )
+    payment=_datetime_near_keyword(
+        text,event_start,
+        r"ΛΗΞΗ\\s+(?:ΤΩΝ\\s+)?ΠΛΗΡΩΜ|ΠΛΗΡΩΜ(?:Η|ΩΝ)|ΚΑΤΑΒΟΛΗ\\s+(?:ΤΟΥ\\s+)?ΑΝΤΙΤΙΜ",
+        require_limit_word=True
+    )
+    return {"registration_deadline":registration,"payment_deadline":payment}
+
+def rules_deadlines(level, start_value):
+    """Fallback from the official 2026 competition timetable when a proclamation
+    has not yielded explicit dates. Returns typed deadlines, never a generic one."""
+    if not start_value:
+        return {}
+    try:
+        start_d=date.fromisoformat(str(start_value)[:10])
+    except Exception:
+        return {}
+    def at(d):
+        return datetime(d.year,d.month,d.day,15,0,tzinfo=TZ).isoformat(timespec="minutes")
+    if level=="E3":
+        # Registration Tuesday 15:00; payment/withdrawal Wednesday 15:00.
+        days_to_tuesday=(start_d.weekday()-1)%7
+        reg=start_d-timedelta(days=days_to_tuesday)
+        if reg>=start_d: reg-=timedelta(days=7)
+        pay=reg+timedelta(days=1)
+        return {"registration_deadline":at(reg),"payment_deadline":at(pay)}
+    if level in {"E1","E2"}:
+        # Registration Thursday 15:00 of the preceding week; payment Monday
+        # 15:00 of tournament week.
+        monday=start_d-timedelta(days=start_d.weekday())
+        reg=monday-timedelta(days=4)
+        pay=monday
+        return {"registration_deadline":at(reg),"payment_deadline":at(pay)}
+    return {}
+
 
 def gdrive_download(url):
     m = re.search(r"/d/([A-Za-z0-9_-]+)", url)
@@ -175,7 +230,7 @@ def proclamation_details(url, year, fallback_start=None):
         "date_found": bool(rng),
         "start": start.isoformat() if start else None,
         "end": end.isoformat() if end else None,
-        "deadline": deadline_from_text(txt, start),
+        **deadlines_from_text(txt, start),
         "categories_pdf": categories_from_text(txt),
     }
 
@@ -234,7 +289,8 @@ def parse_e3_page(year):
                 "venue": venue,
                 "city": "",
                 "lat": None, "lon": None,
-                "deadline": details.get("deadline"),
+                "registration_deadline": details.get("registration_deadline"),
+                "payment_deadline": details.get("payment_deadline"),
                 "status": "confirmed",
                 "source_url": url,
                 "proclamation_url": purl,
@@ -287,11 +343,13 @@ def parse_e1e2_articles(year):
         links=[urljoin(url,a["href"]) for a in scope.find_all("a",href=True) if "drive.google.com" in a["href"] or a["href"].lower().endswith(".pdf")]
         pdf_details=[proclamation_details(x,year,start_d) for x in links[:6]]
         cats=set()
-        deadlines=[]
+        registration_deadlines=[]
+        payment_deadlines=[]
         dates=[]
         for d in pdf_details:
             cats.update(d.get("categories_pdf") or [])
-            if d.get("deadline"): deadlines.append(d["deadline"])
+            if d.get("registration_deadline"): registration_deadlines.append(d["registration_deadline"])
+            if d.get("payment_deadline"): payment_deadlines.append(d["payment_deadline"])
             if d.get("start") and d.get("end"): dates.append((d["start"],d["end"]))
         if dates:
             # For multi-venue E2, use the widest confirmed date range.
@@ -316,7 +374,8 @@ def parse_e1e2_articles(year):
             "date_precision": "proclamation" if dates or rng else "week",
             "venue": "Δείτε την προκήρυξη" if links else "",
             "city": "", "lat": None, "lon": None,
-            "deadline": min(deadlines) if deadlines else deadline_from_text(body, start_d),
+            "registration_deadline": min(registration_deadlines) if registration_deadlines else deadlines_from_text(body,start_d).get("registration_deadline"),
+            "payment_deadline": min(payment_deadlines) if payment_deadlines else deadlines_from_text(body,start_d).get("payment_deadline"),
             "status": "confirmed",
             "source_url": url,
             "proclamation_url": links[0] if links else None,
@@ -414,7 +473,8 @@ def parse_eefoa_api(year):
             "start":start_d.isoformat(),"end":end_d.isoformat(),
             "date_precision":"eefoa-start/week-end" if week else "eefoa-start",
             "venue":g["club"],"city":"","lat":None,"lon":None,
-            "deadline":deadline_from_text(sign_text,start_d),
+            "registration_deadline":deadlines_from_text(sign_text,start_d).get("registration_deadline"),
+            "payment_deadline":deadlines_from_text(sign_text,start_d).get("payment_deadline"),
             "status":"confirmed","source_url":EEFOA,
             "proclamation_url":proclamation,
             "registration_url":registration or EEFOA,
@@ -491,7 +551,8 @@ def parse_eefoa_with_playwright(year):
             "date_precision": "eefoa",
             "venue": cells[-1] if cells else "",
             "city": "", "lat": None, "lon": None,
-            "deadline": deadline_from_text(joined,start_d),
+            "registration_deadline": deadlines_from_text(joined,start_d).get("registration_deadline"),
+            "payment_deadline": deadlines_from_text(joined,start_d).get("payment_deadline"),
             "status":"confirmed",
             "source_url":EEFOA,
             "proclamation_url":None,
@@ -521,7 +582,9 @@ def merge_records(primary, enrichers, old):
         match=next((x for x in result if same_event(x,e)),None)
         if match:
             match["categories"]=sorted(set(match.get("categories",[]))|set(e.get("categories",[])))
-            if not match.get("deadline") and e.get("deadline"):match["deadline"]=e["deadline"]
+            for fld in ("registration_deadline","payment_deadline"):
+                if not match.get(fld) and e.get(fld):
+                    match[fld]=e[fld]
             if e.get("source")=="e-efoa-api":
                 if e.get("venue"): match["venue"]=e["venue"]
                 if e.get("registration_url"): match["registration_url"]=e["registration_url"]
@@ -548,8 +611,9 @@ def merge_records(primary, enrichers, old):
         for fld in ("lat","lon","city"):
             if (x.get(fld) is None or x.get(fld)=="") and prev.get(fld) not in (None,""):
                 x[fld]=prev[fld]
-        if not x.get("deadline") and prev.get("deadline"):
-            x["deadline"]=prev["deadline"]
+        for fld in ("registration_deadline","payment_deadline"):
+            if not x.get(fld) and prev.get(fld):
+                x[fld]=prev[fld]
         if x.get("source")=="e-efoa-api" and prev.get("status")=="planned" and prev.get("start") and prev.get("end"):
             try:
                 ps=date.fromisoformat(prev["start"]); pe=date.fromisoformat(prev["end"])
@@ -641,17 +705,24 @@ def geocode(events):
 def make_ics(events):
     lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//EFOA Tournament Explorer//EL","CALSCALE:GREGORIAN","X-WR-CALNAME:ΕΦΟΑ Tournament Deadlines"]
     stamp=datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    kinds=[
+        ("registration_deadline","registration","Λήξη εγγραφής/δήλωσης","Λήξη εγγραφής"),
+        ("payment_deadline","payment","Λήξη πληρωμής","Λήξη πληρωμής"),
+    ]
     for e in events:
-        if not e.get("deadline"):continue
-        try:dt=datetime.fromisoformat(e["deadline"]).astimezone(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-        except Exception:continue
-        summary=f"Deadline δηλώσεων: {e.get('title','ΕΦΟΑ')}".replace("\n"," ")
-        lines += ["BEGIN:VEVENT",f"UID:{e['id']}@efoa-live",f"DTSTAMP:{stamp}",f"DTSTART:{dt}",f"SUMMARY:{summary}",
-                  f"URL:{e.get('registration_url') or e.get('source_url') or ''}",
-                  "BEGIN:VALARM","TRIGGER:-PT72H","ACTION:DISPLAY","DESCRIPTION:Λήξη δηλώσεων σε 72 ώρες","END:VALARM",
-                  "BEGIN:VALARM","TRIGGER:-PT24H","ACTION:DISPLAY","DESCRIPTION:Λήξη δηλώσεων σε 24 ώρες","END:VALARM","END:VEVENT"]
+        for field,suffix,summary_label,alarm_label in kinds:
+            value=e.get(field)
+            if not value: continue
+            try:dt=datetime.fromisoformat(value).astimezone(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+            except Exception:continue
+            summary=f"{summary_label}: {e.get('title','ΕΦΟΑ')}".replace("\\n"," ")
+            lines += ["BEGIN:VEVENT",f"UID:{e['id']}-{suffix}@efoa-live",f"DTSTAMP:{stamp}",f"DTSTART:{dt}",f"SUMMARY:{summary}",
+                      f"URL:{e.get('registration_url') or e.get('source_url') or ''}",
+                      "BEGIN:VALARM","TRIGGER:-PT72H","ACTION:DISPLAY",f"DESCRIPTION:{alarm_label} σε 72 ώρες","END:VALARM",
+                      "BEGIN:VALARM","TRIGGER:-PT24H","ACTION:DISPLAY",f"DESCRIPTION:{alarm_label} σε 24 ώρες","END:VALARM","END:VEVENT"]
     lines.append("END:VCALENDAR")
-    ICS.write_text("\r\n".join(lines)+"\r\n",encoding="utf-8")
+    ICS.write_text("\\r\\n".join(lines)+"\\r\\n",encoding="utf-8")
+
 
 def main():
     now=datetime.now(TZ);year=now.year
@@ -694,6 +765,16 @@ def main():
             e["union"]="Ε΄ Ένωση"; e["unions"]=["Ε΄ Ένωση"]
             e["source_url"]="https://efoa.gr/ta-athlemata-mas/tenis/teleutaia-nea-tennis/3358-e-ephoa-kai-e-choregos-babolat-greece-parousiazoun-to-babolat-cup-os-epibrabeuse-dyo-koryphaion-athleton-u12"
             e["location_source"]="official-announcement-city"
+    # Fill only missing typed deadlines from official competition rules.
+    for e in events:
+        fallback=rules_deadlines(e.get("level"),e.get("start"))
+        for fld in ("registration_deadline","payment_deadline"):
+            if not e.get(fld) and fallback.get(fld):
+                e[fld]=fallback[fld]
+                e[fld+"_source"]="competition-rules"
+        # Legacy generic deadline was ambiguous (registration vs payment).
+        e.pop("deadline",None)
+
     geocode(events)
     make_ics(events)
     data={
@@ -702,7 +783,7 @@ def main():
         "source_status":"ok" if not errors else ("partial" if events else "error"),
         "errors":errors,
         "sources":sources,
-        "schema_version":3,
+        "schema_version":4,
         "counts":{"e3":len(e3),"e1e2":len(e12),"eefoa":len(ee),"total":len(events)},
         "eefoa_diagnostics":diag,
       },
