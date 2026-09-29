@@ -611,11 +611,31 @@ def geocode(events):
                 g=arr[0] if arr else None
             except Exception:g=None
             cache[key]=g;changed=True
+        if not g and hint:
+            # Some club street addresses are not indexed by OSM. Fall back to
+            # the official EFOA city so the event remains visible on the map,
+            # explicitly marked as approximate.
+            city_key="CITY:"+ascii_key(hint[1])
+            if city_key in cache:
+                g=cache[city_key]
+            else:
+                try:
+                    time.sleep(1.05)
+                    rr=requests.get("https://nominatim.openstreetmap.org/search",params={"q":f"{hint[1]}, Ελλάδα","format":"jsonv2","limit":1,"addressdetails":1},headers={"User-Agent":UA},timeout=12)
+                    aa=rr.json() if rr.ok else []
+                    g=aa[0] if aa else None
+                except Exception:g=None
+                cache[city_key]=g;changed=True
+            if g:
+                e["location_source"]="official-efoa-city+nominatim"
+                e["location_accuracy"]="city"
         if g:
             e["lat"]=float(g["lat"]);e["lon"]=float(g["lon"])
             addr=g.get("address") or {}
             e["city"]=e.get("city") or addr.get("city") or addr.get("town") or addr.get("village") or addr.get("municipality") or ""
-            e["location_source"]="official-efoa-address+nominatim" if hint else "nominatim"
+            if not e.get("location_source"):
+                e["location_source"]="official-efoa-address+nominatim"
+                e["location_accuracy"]="venue"
     if changed:save_json(CACHE,cache)
 
 def make_ics(events):
@@ -665,6 +685,15 @@ def main():
             if inferred:
                 e["categories"]=inferred
                 e["categories_status"]="inferred-current-year"
+
+        # Official EFOA/Babolat announcement: 5th E1, Larissa, 16–20 Oct 2026.
+        if year==2026 and e.get("level")=="E1" and "5" in e.get("title",""):
+            e["start"]="2026-10-16"; e["end"]="2026-10-20"
+            e["city"]="Λάρισα"
+            e["venue"]="Λάρισα – ακριβής σύλλογος προς ανακοίνωση"
+            e["union"]="Ε΄ Ένωση"; e["unions"]=["Ε΄ Ένωση"]
+            e["source_url"]="https://efoa.gr/ta-athlemata-mas/tenis/teleutaia-nea-tennis/3358-e-ephoa-kai-e-choregos-babolat-greece-parousiazoun-to-babolat-cup-os-epibrabeuse-dyo-koryphaion-athleton-u12"
+            e["location_source"]="official-announcement-city"
     geocode(events)
     make_ics(events)
     data={
