@@ -51,4 +51,5 @@ jobs:
           git add data/alert-state.json
           git diff --cached --quiet && exit 0
           git commit -m "Update tournament alert state"
+          git pull --rebase origin main
           git push origin main
