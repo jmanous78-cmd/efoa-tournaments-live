@@ -1,7 +1,9 @@
-const DATA="data/tournaments.json", KEY="efoa-live-v4", ATH={lat:37.9838,lon:23.7275};
+const DATA="data/tournaments.json", KEY="efoa-live-v4", NOTIFY_KEY="efoa-browser-alerts-v1", ATH={lat:37.9838,lon:23.7275};
+const ALERT_CONFIG="config/alerts.json";
 let events=[],map,markers;
 const _now=new Date(), _localToday=new Date(_now.getTime()-_now.getTimezoneOffset()*60000).toISOString().slice(0,10);
-let state={level:"ALL",gender:"ALL",age:"ALL",union:"ALL",from:_localToday,to:"",deadline:"ALL",search:"",favorites:["Α14"],favoritesOnly:true};
+let state={level:"ALL",gender:"ALL",age:"ALL",union:"ALL",from:_localToday,to:"",deadline:"ALL",search:"",favorites:["Α14"],favoritesOnly:true,browserAlerts:false};
+let serverAlertCategories=["Α14"];
 const $=id=>document.getElementById(id), norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase();
 function cats(e){return e.categories||[]}
 function unions(e){return e.unions?.length?e.unions:(e.union?[e.union]:[])}
@@ -21,6 +23,62 @@ function match(e){
  const h=hours(e);if(state.deadline==="OPEN"&&!(h>=0))return false;if(state.deadline==="72"&&!(h>=0&&h<=72))return false;if(state.deadline==="24"&&!(h>=0&&h<=24))return false;if(state.deadline==="NONE"&&e.deadline)return false;
  if(state.search&&!norm([e.title,e.venue,e.city,...unions(e),...cats(e)].join(" ")).includes(norm(state.search)))return false;
  return true;
+}
+function notifyState(){try{return JSON.parse(localStorage.getItem(NOTIFY_KEY)||"{}")}catch{return {}}}
+function saveNotifyState(s){localStorage.setItem(NOTIFY_KEY,JSON.stringify(s))}
+function notificationStatus(){
+ const btn=$("enableAlerts"), status=$("alertStatus");
+ const granted=("Notification" in window)&&Notification.permission==="granted";
+ if(btn){btn.textContent=granted&&state.browserAlerts?"Browser alerts ενεργά":"Ενεργοποίηση browser alerts";btn.classList.toggle("enabled",granted&&state.browserAlerts)}
+ if(status){status.textContent=`Background GitHub alerts: ${serverAlertCategories.join(", ")} · Browser alerts: ${granted&&state.browserAlerts?"ενεργά όσο το site είναι ανοιχτό":"ανενεργά"}`}
+}
+function fireBrowserNotification(title,body,url){
+ if(!state.browserAlerts||!("Notification" in window)||Notification.permission!=="granted")return;
+ const n=new Notification(title,{body,icon:""});
+ n.onclick=()=>{window.focus();if(url)window.open(url,"_blank")};
+}
+function checkBrowserAlerts(list,{bootstrap=false}={}){
+ if(!state.browserAlerts||!("Notification" in window)||Notification.permission!=="granted")return;
+ const ns=notifyState(), known=new Set(ns.known||[]), sent=ns.sent||{};
+ const relevant=list.filter(e=>mine(e)&&e.end>=_localToday);
+ if(!ns.initialized||bootstrap){
+   relevant.forEach(e=>known.add(e.id));
+   ns.initialized=true;
+ }else{
+   relevant.forEach(e=>{
+     if(!known.has(e.id)){
+       fireBrowserNotification(`Νέο ${e.level} · ${cats(e).join(", ")}`,e.title,e.registration_url||e.source_url);
+       known.add(e.id);
+     }
+   });
+ }
+ relevant.forEach(e=>{
+   const h=hours(e); if(h==null||h<0)return;
+   const threshold=h<=24?24:h<=72?72:null;if(!threshold)return;
+   const key=`${e.id}:${e.deadline}:${threshold}`;
+   if(!sent[key]){
+     fireBrowserNotification(`Deadline σε ≤${threshold} ώρες`,`${e.title} · ${new Date(e.deadline).toLocaleString("el-GR")}`,e.registration_url||e.source_url);
+     sent[key]=new Date().toISOString();
+   }
+ });
+ ns.known=[...known];ns.sent=sent;saveNotifyState(ns);
+}
+async function enableBrowserAlerts(){
+ if(!("Notification" in window)){alert("Ο browser δεν υποστηρίζει notifications.");return}
+ const permission=await Notification.requestPermission();
+ state.browserAlerts=permission==="granted";save();notificationStatus();
+ if(state.browserAlerts)checkBrowserAlerts(events,{bootstrap:false});
+}
+async function refreshData(){
+ try{
+  const d=await fetch(DATA+"?t="+Date.now(),{cache:"no-store"}).then(r=>r.json());
+  const oldIds=new Set(events.map(e=>e.id));events=d.tournaments||[];
+  render();checkBrowserAlerts(events,{bootstrap:oldIds.size===0});
+ }catch(e){console.warn("Data refresh failed",e)}
+}
+async function loadAlertConfig(){
+ try{const c=await fetch(ALERT_CONFIG+"?t="+Date.now(),{cache:"no-store"}).then(r=>r.json());serverAlertCategories=c.categories||["Α14"]}catch{}
+ notificationStatus();
 }
 function favUI(){const all=["Α10","Α12","Α14","Α16","Α18","Κ10","Κ12","Κ14","Κ16","Κ18","Μ10","Μ12","Μ14","Μ16","Μ18"];$("favorites").innerHTML=all.map(c=>`<button class="fav ${state.favorites.includes(c)?"on":""}" data-c="${c}">${c}</button>`).join("");document.querySelectorAll(".fav").forEach(b=>b.onclick=()=>{state.favorites=state.favorites.includes(b.dataset.c)?state.favorites.filter(x=>x!==b.dataset.c):[...state.favorites,b.dataset.c];save();favUI();render()});$("favoritesOnly").checked=state.favoritesOnly}
 function deadlineHero(list){
@@ -43,6 +101,8 @@ function render(){
 function bind(){
  ["level","gender","age","union","from","to","deadline","search"].forEach(id=>{let el=$(id);el.value=state[id]||"";el.oninput=()=>{state[id]=el.value;save();render()}});
  $("favoritesOnly").onchange=()=>{state.favoritesOnly=$("favoritesOnly").checked;save();render()};
- $("reset").onclick=()=>{localStorage.removeItem(KEY);location.reload()}
+ $("reset").onclick=()=>{localStorage.removeItem(KEY);location.reload()};
+ $("enableAlerts").onclick=enableBrowserAlerts;
+ notificationStatus();
 }
-fetch(DATA,{cache:"no-store"}).then(r=>r.json()).then(d=>{events=d.tournaments||[];load();const us=[...new Set(events.flatMap(unions).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"el"));$("union").innerHTML='<option value="ALL">Όλες οι Ενώσεις</option>'+us.map(u=>`<option>${u}</option>`).join("");map=L.map("map").setView([38.3,23.5],6);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap"}).addTo(map);markers=L.markerClusterGroup();map.addLayer(markers);favUI();bind();render();setInterval(render,60000)});
+Promise.all([fetch(DATA,{cache:"no-store"}).then(r=>r.json()),loadAlertConfig()]).then(([d])=>{events=d.tournaments||[];load();const us=[...new Set(events.flatMap(unions).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"el"));$("union").innerHTML='<option value="ALL">Όλες οι Ενώσεις</option>'+us.map(u=>`<option>${u}</option>`).join("");map=L.map("map").setView([38.3,23.5],6);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap"}).addTo(map);markers=L.markerClusterGroup();map.addLayer(markers);favUI();bind();render();notificationStatus();if(state.browserAlerts)checkBrowserAlerts(events,{bootstrap:!notifyState().initialized});setInterval(render,60000);setInterval(refreshData,10*60*1000)});
