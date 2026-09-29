@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "updated_at": "2026-09-29T15:26:05.658Z",
+    "source_status": "seed",
+    "schema_version": 2
+  },
+  "tournaments": [
+    {
+      "id": "e3-e-40-2026",
+      "level": "E3",
+      "title": "Ε3 40ης εβδομάδας – Ε΄ Ένωση",
+      "categories": [
+        "Α14",
+        "Κ14"
+      ],
+      "union": "Ε΄ Ένωση",
+      "unions": [
+        "Ε΄ Ένωση"
+      ],
+      "start": "2026-10-02",
+      "end": "2026-10-04",
+      "venue": "ΟΑ Φοίβος Λάρισας",
+      "city": "Λάρισα",
+      "lat": 39.639,
+      "lon": 22.4191,
+      "deadline": null,
+      "status": "confirmed",
+      "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
+      "proclamation_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list"
+    },
+    {
+      "id": "e3-d-40-2026",
+      "level": "E3",
+      "title": "Ε3 Open 40ης – Δ΄ Ένωση",
+      "categories": [
+        "Α10",
+        "Κ10",
+        "Α12",
+        "Κ12",
+        "Α14",
+        "Κ14"
+      ],
+      "union": "Δ΄ Ένωση",
+      "unions": [
+        "Δ΄ Ένωση"
+      ],
+      "start": "2026-10-03",
+      "end": "2026-10-04",
+      "venue": "ΟΑ Άρτας",
+      "city": "Άρτα",
+      "lat": 39.16,
+      "lon": 20.985,
+      "deadline": null,
+      "status": "confirmed",
+      "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list"
+    },
+    {
+      "id": "e3-z-40-2026",
+      "level": "E3",
+      "title": "Ε3 Open 40ης – Ζ΄ Ένωση",
+      "categories": [
+        "Α10",
+        "Κ10",
+        "Α12",
+        "Κ12",
+        "Α14",
+        "Κ14"
+      ],
+      "union": "Ζ΄ Ένωση",
+      "unions": [
+        "Ζ΄ Ένωση"
+      ],
+      "start": "2026-10-02",
+      "end": "2026-10-04",
+      "venue": "Τενιστική Ακαδημία Κρήτης",
+      "city": "Ηράκλειο",
+      "lat": 35.3246,
+      "lon": 25.1187,
+      "deadline": "2026-09-29T15:00:00+03:00",
+      "status": "confirmed",
+      "source_url": "https://www.zenositennis.gr/",
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list"
+    },
+    {
+      "id": "e3-th-41-2026",
+      "level": "E3",
+      "title": "Ε3 41ης – Θ΄ Ένωση",
+      "categories": [
+        "Α12",
+        "Κ12",
+        "Α14",
+        "Κ14",
+        "Α16",
+        "Κ16"
+      ],
+      "union": "Θ΄ Ένωση",
+      "unions": [
+        "Θ΄ Ένωση"
+      ],
+      "start": "2026-10-09",
+      "end": "2026-10-11",
+      "venue": "Ροδιακός ΟΑ",
+      "city": "Ρόδος",
+      "lat": 36.4316,
+      "lon": 28.2176,
+      "deadline": null,
+      "status": "confirmed",
+      "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list"
+    },
+    {
+      "id": "e1-5-2026",
+      "level": "E1",
+      "title": "Ε1 5ο",
+      "categories": [],
+      "union": "Γ΄ Ένωση",
+      "unions": [
+        "Γ΄ Ένωση"
+      ],
+      "start": "2026-10-16",
+      "end": "2026-10-20",
+      "venue": "Έδρα προς ανακοίνωση",
+      "city": "",
+      "lat": null,
+      "lon": null,
+      "deadline": null,
+      "status": "planned",
+      "source_url": "https://efoa.gr/images/news/2026/Agonistiko%20Programma%20Antisphairises%202026.pdf",
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list"
+    },
+    {
+      "id": "e2-5-2026",
+      "level": "E2",
+      "title": "Ε2 5ο",
+      "categories": [],
+      "union": "Β΄ & Ζ΄ Ένωση",
+      "unions": [
+        "Β΄ Ένωση",
+        "Ζ΄ Ένωση"
+      ],
+      "start": "2026-10-23",
+      "end": "2026-10-27",
+      "venue": "Έδρες προς ανακοίνωση",
+      "city": "",
+      "lat": null,
+      "lon": null,
+      "deadline": null,
+      "status": "planned",
+      "source_url": "https://efoa.gr/images/news/2026/Agonistiko%20Programma%20Antisphairises%202026.pdf",
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list"
+    }
+  ]
+}
