@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-09-29T20:19:08+03:00",
+    "updated_at": "2026-09-29T20:21:32+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -428,8 +428,8 @@
       "date_precision": "eefoa-start/week-end",
       "venue": "ΤΕΝ ΑΚΑΔ ΚΡΗΤΗΣ",
       "city": "Ηράκλειο",
-      "lat": null,
-      "lon": null,
+      "lat": 35.33908,
+      "lon": 25.1332843,
       "deadline": null,
       "status": "confirmed",
       "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
@@ -438,7 +438,9 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      ],
+      "location_source": "official-efoa-city+nominatim",
+      "location_accuracy": "city"
     },
     {
       "id": "e3-2026-w40-300baf7c04c2",
@@ -464,8 +466,8 @@
       "date_precision": "proclamation",
       "venue": "ΟΑ ΞΥΛΟΚΑΣΤΡΟΥ ΣΥΘΑΣ",
       "city": "Ξυλόκαστρο",
-      "lat": null,
-      "lon": null,
+      "lat": 38.078321,
+      "lon": 22.6330434,
       "deadline": "2026-09-30T15:00+03:00",
       "status": "confirmed",
       "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
@@ -474,7 +476,9 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      ],
+      "location_source": "official-efoa-city+nominatim",
+      "location_accuracy": "city"
     },
     {
       "id": "e3-2026-w41-c871b637cd66",
@@ -524,21 +528,22 @@
         "Κ16",
         "Κ18"
       ],
-      "union": "Γ΄ Ένωση",
+      "union": "Ε΄ Ένωση",
       "unions": [
-        "Γ΄ Ένωση"
+        "Ε΄ Ένωση"
       ],
       "start": "2026-10-16",
       "end": "2026-10-20",
-      "venue": "Έδρα προς ανακοίνωση",
-      "city": "",
+      "venue": "Λάρισα – ακριβής σύλλογος προς ανακοίνωση",
+      "city": "Λάρισα",
       "lat": null,
       "lon": null,
       "deadline": null,
       "status": "planned",
-      "source_url": "https://efoa.gr/images/news/2026/Agonistiko%20Programma%20Antisphairises%202026.pdf",
+      "source_url": "https://efoa.gr/ta-athlemata-mas/tenis/teleutaia-nea-tennis/3358-e-ephoa-kai-e-choregos-babolat-greece-parousiazoun-to-babolat-cup-os-epibrabeuse-dyo-koryphaion-athleton-u12",
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "categories_status": "inferred-current-year"
+      "categories_status": "inferred-current-year",
+      "location_source": "official-announcement-city"
     },
     {
       "id": "eefoa-3728",
