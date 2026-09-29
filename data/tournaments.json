@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-09-29T20:21:32+03:00",
+    "updated_at": "2026-09-29T21:46:00+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -9,7 +9,7 @@
       "https://efoa.gr/component/tags/tag/prokiryksi",
       "https://e-efoa.gr/admin/tournamentsview/list"
     ],
-    "schema_version": 3,
+    "schema_version": 4,
     "counts": {
       "e3": 11,
       "e1e2": 0,
@@ -109,7 +109,8 @@
       "city": "",
       "lat": null,
       "lon": null,
-      "deadline": null,
+      "registration_deadline": "2026-09-10T15:00+03:00",
+      "payment_deadline": "2026-09-14T15:00+03:00",
       "status": "confirmed",
       "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
       "proclamation_url": null,
@@ -117,7 +118,9 @@
       "source": "e-efoa-api",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      ],
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "e3-2026-w39-98430ccade48",
@@ -143,7 +146,8 @@
       "city": "",
       "lat": null,
       "lon": null,
-      "deadline": null,
+      "registration_deadline": "2026-09-22T15:00+03:00",
+      "payment_deadline": "2026-09-23T15:00+03:00",
       "status": "confirmed",
       "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
       "proclamation_url": "https://drive.google.com/file/d/15HV1Th857CmKs85vRXad3SEFmmCJ1Jg-/view?usp=drive_link",
@@ -151,7 +155,9 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      ],
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "e3-2026-w39-075143118946",
@@ -177,7 +183,8 @@
       "city": "",
       "lat": null,
       "lon": null,
-      "deadline": null,
+      "registration_deadline": "2026-09-22T15:00+03:00",
+      "payment_deadline": "2026-09-23T15:00+03:00",
       "status": "confirmed",
       "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
       "proclamation_url": "https://drive.google.com/file/d/1qwyJ002EZqV-1G-UqSbLupDzWjWm8hNR/view?usp=drive_link",
@@ -185,7 +192,9 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      ],
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "e3-2026-w39-b20cf1daeb3b",
@@ -209,7 +218,8 @@
       "city": "",
       "lat": null,
       "lon": null,
-      "deadline": null,
+      "registration_deadline": "2026-09-22T15:00+03:00",
+      "payment_deadline": "2026-09-23T15:00+03:00",
       "status": "confirmed",
       "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
       "proclamation_url": "https://drive.google.com/file/d/1G0wRLi4Fibo5tatSbkBi1axYVQzF2O17/view?usp=drive_link",
@@ -217,7 +227,9 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      ],
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "e3-2026-w39-8707115edc56",
@@ -241,7 +253,8 @@
       "city": "Άρτα",
       "lat": 39.1591002,
       "lon": 20.9825383,
-      "deadline": null,
+      "registration_deadline": "2026-09-22T15:00+03:00",
+      "payment_deadline": "2026-09-23T15:00+03:00",
       "status": "confirmed",
       "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
       "proclamation_url": "https://drive.google.com/file/d/1fruTlA0zwXnUvDf4CjKgFdT3L61otdLv/view?usp=drive_link",
@@ -249,7 +262,9 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      ],
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "e3-2026-w39-41bd75a57b2f",
@@ -273,7 +288,8 @@
       "city": "",
       "lat": null,
       "lon": null,
-      "deadline": null,
+      "registration_deadline": "2026-09-22T15:00+03:00",
+      "payment_deadline": "2026-09-23T15:00+03:00",
       "status": "confirmed",
       "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
       "proclamation_url": "https://drive.google.com/file/d/18DOvraJb7YiqCXJIXx4DZCyybqvxS_cr/view?usp=drive_link",
@@ -281,7 +297,9 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      ],
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "e3-2026-w39-b49a555fbcb5",
@@ -307,7 +325,8 @@
       "city": "",
       "lat": null,
       "lon": null,
-      "deadline": "2026-09-23T15:00+03:00",
+      "registration_deadline": "2026-09-22T15:00+03:00",
+      "payment_deadline": "2026-09-23T15:00+03:00",
       "status": "confirmed",
       "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
       "proclamation_url": "https://drive.google.com/file/d/1lnZc0MXPSyv_aF6t9zQiwbF6n9E7YDsa/view?usp=drive_link",
@@ -315,7 +334,9 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      ],
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "eefoa-3708",
@@ -339,12 +360,15 @@
       "city": "Λάρισα",
       "lat": 39.637676,
       "lon": 22.421193,
-      "deadline": null,
+      "registration_deadline": "2026-09-22T15:00+03:00",
+      "payment_deadline": "2026-09-23T15:00+03:00",
       "status": "confirmed",
       "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
       "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
+      "source": "e-efoa-api",
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "e3-2026-w40-8707115edc56",
@@ -368,7 +392,8 @@
       "city": "Άρτα",
       "lat": 39.1591002,
       "lon": 20.9825383,
-      "deadline": null,
+      "registration_deadline": "2026-09-29T15:00+03:00",
+      "payment_deadline": "2026-09-30T15:00+03:00",
       "status": "confirmed",
       "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
       "proclamation_url": "https://drive.google.com/file/d/1LAn8BQuEkNTnCeq0TONIDvWNIBHD0phe/view?usp=drive_link",
@@ -376,7 +401,9 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      ],
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "e3-2026-w40-09146c442d92",
@@ -398,7 +425,8 @@
       "city": "Λάρισα",
       "lat": 39.637676,
       "lon": 22.421193,
-      "deadline": null,
+      "registration_deadline": "2026-09-29T15:00+03:00",
+      "payment_deadline": "2026-09-30T15:00+03:00",
       "status": "confirmed",
       "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
       "proclamation_url": "https://drive.google.com/file/d/1sNL6rv3MQtkvxhebQdoRRnuY78qfNHdc/view?usp=drive_link",
@@ -406,7 +434,9 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      ],
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "e3-2026-w40-984fc27e74bd",
@@ -430,7 +460,8 @@
       "city": "Ηράκλειο",
       "lat": 35.33908,
       "lon": 25.1332843,
-      "deadline": null,
+      "registration_deadline": "2026-09-29T15:00+03:00",
+      "payment_deadline": "2026-09-30T15:00+03:00",
       "status": "confirmed",
       "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
       "proclamation_url": "https://drive.google.com/file/d/1DX1xKd4igarJtMn5n9xDyem2YwhgPoJr/view?usp=drive_link",
@@ -439,8 +470,8 @@
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
       ],
-      "location_source": "official-efoa-city+nominatim",
-      "location_accuracy": "city"
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "e3-2026-w40-300baf7c04c2",
@@ -468,7 +499,8 @@
       "city": "Ξυλόκαστρο",
       "lat": 38.078321,
       "lon": 22.6330434,
-      "deadline": "2026-09-30T15:00+03:00",
+      "registration_deadline": "2026-09-29T15:00+03:00",
+      "payment_deadline": "2026-09-30T15:00+03:00",
       "status": "confirmed",
       "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
       "proclamation_url": "https://drive.google.com/file/d/1aTt694jFgD5flZ8f4QMRF_DCkiYhCqKZ/view?usp=drive_link",
@@ -477,8 +509,8 @@
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
       ],
-      "location_source": "official-efoa-city+nominatim",
-      "location_accuracy": "city"
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "e3-2026-w41-c871b637cd66",
@@ -504,7 +536,8 @@
       "city": "Ρόδος",
       "lat": 36.4260075,
       "lon": 28.2290247,
-      "deadline": null,
+      "registration_deadline": "2026-10-06T15:00+03:00",
+      "payment_deadline": "2026-10-07T15:00+03:00",
       "status": "confirmed",
       "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
       "proclamation_url": "https://drive.google.com/file/d/1NLZPLbZR8tvAVasW9TbBu02h75VFtNla/view?usp=drive_link",
@@ -512,7 +545,9 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      ],
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "e1-5-2026",
@@ -538,12 +573,15 @@
       "city": "Λάρισα",
       "lat": null,
       "lon": null,
-      "deadline": null,
       "status": "planned",
       "source_url": "https://efoa.gr/ta-athlemata-mas/tenis/teleutaia-nea-tennis/3358-e-ephoa-kai-e-choregos-babolat-greece-parousiazoun-to-babolat-cup-os-epibrabeuse-dyo-koryphaion-athleton-u12",
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
       "categories_status": "inferred-current-year",
-      "location_source": "official-announcement-city"
+      "location_source": "official-announcement-city",
+      "registration_deadline": "2026-10-08T15:00+03:00",
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline": "2026-10-12T15:00+03:00",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "eefoa-3728",
@@ -559,12 +597,15 @@
       "city": "",
       "lat": null,
       "lon": null,
-      "deadline": null,
       "status": "confirmed",
       "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
       "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
+      "source": "e-efoa-api",
+      "registration_deadline": "2026-10-13T15:00+03:00",
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline": "2026-10-14T15:00+03:00",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "e2-5-2026",
@@ -591,11 +632,14 @@
       "city": "",
       "lat": null,
       "lon": null,
-      "deadline": null,
       "status": "planned",
       "source_url": "https://efoa.gr/images/news/2026/Agonistiko%20Programma%20Antisphairises%202026.pdf",
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "categories_status": "inferred-current-year"
+      "categories_status": "inferred-current-year",
+      "registration_deadline": "2026-10-15T15:00+03:00",
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline": "2026-10-19T15:00+03:00",
+      "payment_deadline_source": "competition-rules"
     }
   ]
 }
