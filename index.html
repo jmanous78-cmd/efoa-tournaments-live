@@ -19,7 +19,7 @@
   </div>
 </section>
 <section id="nextDeadline" class="card hero"></section>
-<section class="card"><h2>Η εβδομάδα μου</h2><div class="week-grid"><div><b id="wEvents">0</b><span>τουρνουά επόμενων 30 ημερών</span></div><div><b id="wDeadlines">0</b><span>ενεργά deadlines</span></div><div><b id="wNearest">—</b><span id="wNearestText">κοντινότερο από Αθήνα</span></div></div></section>
+<section class="card"><h2>Η εβδομάδα μου</h2><div class="week-grid"><div><b id="wEvents">0</b><span>τουρνουά επόμενων 30 ημερών</span></div><div><b id="wDeadlines">0</b><span>ενεργές προθεσμίες εγγραφής / πληρωμής</span></div><div><b id="wNearest">—</b><span id="wNearestText">κοντινότερο από Αθήνα</span></div></div></section>
 <section class="card filters">
 <input id="search" placeholder="Αναζήτηση πόλης, συλλόγου, τίτλου…">
 <select id="level"><option value="ALL">Όλα Ε1/Ε2/Ε3</option><option>E1</option><option>E2</option><option>E3</option></select>
@@ -27,7 +27,16 @@
 <select id="age"><option value="ALL">Όλες ηλικίες</option><option>10</option><option>12</option><option>14</option><option>16</option><option>18</option></select>
 <select id="union"><option value="ALL">Όλες οι Ενώσεις</option></select>
 <label>Από <input id="from" type="date"></label><label>Έως <input id="to" type="date"></label>
-<select id="deadline"><option value="ALL">Όλα deadlines</option><option value="OPEN">Ενεργές δηλώσεις</option><option value="72">≤72 ώρες</option><option value="24">≤24 ώρες</option><option value="NONE">Χωρίς deadline</option></select>
+<select id="deadline">
+<option value="ALL">Όλες οι προθεσμίες</option>
+<option value="REG_OPEN">Ανοιχτή εγγραφή</option>
+<option value="REG_72">Εγγραφή ≤72 ώρες</option>
+<option value="REG_24">Εγγραφή ≤24 ώρες</option>
+<option value="PAY_OPEN">Ανοιχτή πληρωμή</option>
+<option value="PAY_72">Πληρωμή ≤72 ώρες</option>
+<option value="PAY_24">Πληρωμή ≤24 ώρες</option>
+<option value="NONE">Χωρίς προθεσμίες</option>
+</select>
 <button id="reset">Καθαρισμός</button>
 </section>
 <section class="layout"><div class="card map-card"><div id="map"></div></div><div class="card list-card"><div class="list-head"><h2>Τουρνουά</h2><span id="count"></span></div><div id="list"></div></div></section>
