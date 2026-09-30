@@ -9,3 +9,5 @@ Live dashboard για ελληνικά τουρνουά Ε1 / Ε2 / Ε3 με χ�
 https://jmanous78-cmd.github.io/efoa-tournaments-live/
 
 Τα δεδομένα ανανεώνονται αυτόματα από δημόσιες επίσημες πηγές ΕΦΟΑ / e-ΕΦΟΑ.
+
+Χάρτης: MapLibre GL JS + OpenFreeMap vector tiles (OpenStreetMap data).
