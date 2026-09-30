@@ -1,10 +1,81 @@
 const DATA="data/tournaments.json", KEY="efoa-live-v5", NOTIFY_KEY="efoa-browser-alerts-v2", ATH={lat:37.9838,lon:23.7275};
 const ALERT_CONFIG="config/alerts.json";
-let events=[],map,markers;
+let events=[],map,mapReady=false,currentMapEvents=[];
 const _now=new Date(), _localToday=new Date(_now.getTime()-_now.getTimezoneOffset()*60000).toISOString().slice(0,10);
 let state={level:"ALL",gender:"ALL",age:"ALL",union:"ALL",from:_localToday,to:"",deadline:"ALL",search:"",favorites:["Α14"],favoritesOnly:true,browserAlerts:false};
 let serverAlertCategories=["Α14"];
 const $=id=>document.getElementById(id), norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase();
+function esc(s){return String(s??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]))}
+function safeUrl(value){
+ try{
+  const u=new URL(String(value||""),location.href);
+  return u.protocol==="https:"||u.origin===location.origin?u.href:"#";
+ }catch{return "#"}
+}
+function mapGeoJSON(list){
+ return {type:"FeatureCollection",features:list.filter(e=>Number.isFinite(Number(e.lon))&&Number.isFinite(Number(e.lat))).map(e=>({
+  type:"Feature",
+  geometry:{type:"Point",coordinates:[Number(e.lon),Number(e.lat)]},
+  properties:{id:String(e.id||""),title:String(e.title||""),venue:String(e.venue||""),city:String(e.city||""),start:String(e.start||""),end:String(e.end||"")}
+ }))};
+}
+function updateMap(list){
+ currentMapEvents=list;
+ if(!mapReady||!map)return;
+ const source=map.getSource("tournaments");
+ if(source)source.setData(mapGeoJSON(list));
+}
+function initMap(){
+ map=new maplibregl.Map({
+  container:"map",
+  style:"https://tiles.openfreemap.org/styles/liberty",
+  center:[23.5,38.3],
+  zoom:5.5,
+  attributionControl:false
+ });
+ map.addControl(new maplibregl.NavigationControl(),"top-left");
+ map.addControl(new maplibregl.AttributionControl({
+  compact:true,
+  customAttribution:'OpenFreeMap © OpenMapTiles · Data © OpenStreetMap contributors'
+ }),"bottom-right");
+ map.on("load",()=>{
+  mapReady=true;
+  map.addSource("tournaments",{type:"geojson",data:mapGeoJSON(currentMapEvents),cluster:true,clusterMaxZoom:13,clusterRadius:45});
+  map.addLayer({id:"clusters",type:"circle",source:"tournaments",filter:["has","point_count"],paint:{
+   "circle-color":["step",["get","point_count"],"#86d45a",5,"#5fbf3f",12,"#35942b"],
+   "circle-radius":["step",["get","point_count"],18,5,23,12,29],
+   "circle-stroke-width":3,"circle-stroke-color":"#ffffff"
+  }});
+  map.addLayer({id:"cluster-count",type:"symbol",source:"tournaments",filter:["has","point_count"],layout:{
+   "text-field":["get","point_count_abbreviated"],"text-size":13
+  },paint:{"text-color":"#172033"}});
+  map.addLayer({id:"tournament-points",type:"circle",source:"tournaments",filter:["!",["has","point_count"]],paint:{
+   "circle-color":"#2878bd","circle-radius":8,"circle-stroke-width":2,"circle-stroke-color":"#ffffff"
+  }});
+  updateMap(currentMapEvents);
+ });
+ map.on("click","clusters",async e=>{
+  const f=map.queryRenderedFeatures(e.point,{layers:["clusters"]})[0];
+  if(!f)return;
+  try{
+   const z=await map.getSource("tournaments").getClusterExpansionZoom(f.properties.cluster_id);
+   map.easeTo({center:f.geometry.coordinates,zoom:z});
+  }catch(err){console.warn("Cluster zoom failed",err)}
+ });
+ map.on("click","tournament-points",e=>{
+  const f=e.features?.[0];if(!f)return;
+  const p=f.properties||{};
+  new maplibregl.Popup({offset:12})
+   .setLngLat(f.geometry.coordinates)
+   .setHTML(`<b>${esc(p.title)}</b><br>${esc(p.venue||p.city)}<br>${esc(fmt(p.start))}–${esc(fmt(p.end))}`)
+   .addTo(map);
+ });
+ ["clusters","tournament-points"].forEach(layer=>{
+  map.on("mouseenter",layer,()=>map.getCanvas().style.cursor="pointer");
+  map.on("mouseleave",layer,()=>map.getCanvas().style.cursor="");
+ });
+ map.on("error",e=>console.warn("MapLibre/OpenFreeMap:",e?.error||e));
+}
 
 function cats(e){return e.categories||[]}
 function unions(e){return e.unions?.length?e.unions:(e.union?[e.union]:[])}
@@ -136,8 +207,8 @@ function deadlineHero(list){
    <h3>${title} · ${e.level}</h3>
    <div class="countdown">${countdownText(h)}</div>
    <div class="deadline-date">${fmtDT(d.value)}</div>
-   <div>${e.title} — ${e.venue||e.city||""}</div>
-   <div class="links">${e.registration_url?`<a target="_blank" rel="noopener noreferrer" href="${e.registration_url}">e-ΕΦΟΑ</a>`:""}${e.proclamation_url?`<a target="_blank" rel="noopener noreferrer" href="${e.proclamation_url}">Προκήρυξη</a>`:""}</div>
+   <div>${esc(e.title)} — ${esc(e.venue||e.city||"")}</div>
+   <div class="links">${e.registration_url?`<a target="_blank" rel="noopener noreferrer" href="${safeUrl(e.registration_url)}">e-ΕΦΟΑ</a>`:""}${e.proclamation_url?`<a target="_blank" rel="noopener noreferrer" href="${safeUrl(e.proclamation_url)}">Προκήρυξη</a>`:""}</div>
   </div>`;
  };
  box.className="card hero";
@@ -159,13 +230,12 @@ function render(){
  const list=events.filter(match).sort((a,b)=>a.start.localeCompare(b.start));
  $("count").textContent=list.length+" αποτελέσματα";deadlineHero(list);week(list);
  $("list").innerHTML=list.map(e=>`<article class="event">
-  <h3>${e.title}</h3>
-  <div class="meta">${fmt(e.start)} – ${fmt(e.end)} · ${e.venue||"Έδρα προς ανακοίνωση"}${e.city?" · "+e.city:""}</div>
-  <div class="badges"><span class="badge">${e.level}</span>${cats(e).map(c=>`<span class="badge">${c}</span>`).join("")}${e.categories_status==="inferred-current-year"?'<span class="badge warn-b">Κατηγορίες προς επιβεβαίωση</span>':""}${mine(e)?'<span class="badge mine">★ Δική μου</span>':""}${deadlineEntries(e).map(deadlineBadge).join("")}</div>
-  <div class="links">${e.registration_url?`<a target="_blank" rel="noopener noreferrer" href="${e.registration_url}">e-ΕΦΟΑ</a>`:""}${e.source_url?`<a target="_blank" rel="noopener noreferrer" href="${e.source_url}">Πηγή</a>`:""}${e.proclamation_url?`<a target="_blank" rel="noopener noreferrer" href="${e.proclamation_url}">Προκήρυξη</a>`:""}</div>
+  <h3>${esc(e.title)}</h3>
+  <div class="meta">${fmt(e.start)} – ${fmt(e.end)} · ${esc(e.venue||"Έδρα προς ανακοίνωση")}${e.city?" · "+esc(e.city):""}</div>
+  <div class="badges"><span class="badge">${e.level}</span>${cats(e).map(c=>`<span class="badge">${esc(c)}</span>`).join("")}${e.categories_status==="inferred-current-year"?'<span class="badge warn-b">Κατηγορίες προς επιβεβαίωση</span>':""}${mine(e)?'<span class="badge mine">★ Δική μου</span>':""}${deadlineEntries(e).map(deadlineBadge).join("")}</div>
+  <div class="links">${e.registration_url?`<a target="_blank" rel="noopener noreferrer" href="${safeUrl(e.registration_url)}">e-ΕΦΟΑ</a>`:""}${e.source_url?`<a target="_blank" rel="noopener noreferrer" href="${safeUrl(e.source_url)}">Πηγή</a>`:""}${e.proclamation_url?`<a target="_blank" rel="noopener noreferrer" href="${safeUrl(e.proclamation_url)}">Προκήρυξη</a>`:""}</div>
  </article>`).join("")||'<div class="event">Δεν βρέθηκαν τουρνουά.</div>';
- markers.clearLayers();
- list.filter(e=>e.lat!=null&&e.lon!=null).forEach(e=>L.marker([e.lat,e.lon]).bindPopup(`<b>${e.title}</b><br>${e.venue||""}<br>${fmt(e.start)}–${fmt(e.end)}`).addTo(markers));
+ updateMap(list);
 }
 function bind(){
  ["level","gender","age","union","from","to","deadline","search"].forEach(id=>{let el=$(id);el.value=state[id]||"";el.oninput=()=>{state[id]=el.value;save();render()}});
@@ -178,9 +248,7 @@ Promise.all([fetch(DATA,{cache:"no-store"}).then(r=>r.json()),loadAlertConfig()]
  events=d.tournaments||[];load();
  const us=[...new Set(events.flatMap(unions).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"el"));
  $("union").innerHTML='<option value="ALL">Όλες οι Ενώσεις</option>'+us.map(u=>`<option>${u}</option>`).join("");
- map=L.map("map").setView([38.3,23.5],6);
- L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap"}).addTo(map);
- markers=L.markerClusterGroup();map.addLayer(markers);
+ initMap();
  favUI();bind();render();notificationStatus();
  if(state.browserAlerts)checkBrowserAlerts(events,{bootstrap:!notifyState().initialized});
  setInterval(render,60000);setInterval(refreshData,10*60*1000)

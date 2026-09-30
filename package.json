@@ -1,10 +1,9 @@
 {
   "name": "efoa-tournaments-live",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Static frontend dependencies for the EFOA Tournament Explorer",
   "dependencies": {
-    "leaflet": "1.9.4",
-    "leaflet.markercluster": "1.5.3"
+    "maplibre-gl": "6.11.2"
   }
 }

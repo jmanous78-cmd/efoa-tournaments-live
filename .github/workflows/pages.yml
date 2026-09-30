@@ -35,20 +35,15 @@ jobs:
           set -euo pipefail
           rm -rf _site
           mkdir -p _site/assets _site/data _site/config
-          mkdir -p _site/vendor/leaflet/images _site/vendor/leaflet-markercluster
+          mkdir -p _site/vendor/maplibre
 
           cp index.html _site/
           cp assets/app.js assets/style.css _site/assets/
           cp data/tournaments.json data/efoa-tournaments.ics _site/data/
           cp config/alerts.json _site/config/
 
-          cp node_modules/leaflet/dist/leaflet.js _site/vendor/leaflet/
-          cp node_modules/leaflet/dist/leaflet.css _site/vendor/leaflet/
-          cp -R node_modules/leaflet/dist/images/. _site/vendor/leaflet/images/
-
-          cp node_modules/leaflet.markercluster/dist/leaflet.markercluster.js _site/vendor/leaflet-markercluster/
-          cp node_modules/leaflet.markercluster/dist/MarkerCluster.css _site/vendor/leaflet-markercluster/
-          cp node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css _site/vendor/leaflet-markercluster/
+          cp node_modules/maplibre-gl/dist/maplibre-gl.js _site/vendor/maplibre/
+          cp node_modules/maplibre-gl/dist/maplibre-gl.css _site/vendor/maplibre/
 
           touch _site/.nojekyll
 

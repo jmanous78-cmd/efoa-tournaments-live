@@ -35,3 +35,15 @@ jobs:
             echo "Private key material detected."
             exit 1
           fi
+
+      - name: Validate frontend JavaScript
+        run: node --check assets/app.js
+
+      - name: Reject direct use of OSM standard tile servers
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git grep -n -I -- 'tile.openstreetmap.org'; then
+            echo "Do not use the community OSM standard tile servers directly."
+            exit 1
+          fi
