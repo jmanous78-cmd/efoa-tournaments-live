@@ -1,2 +1,26 @@
+# Transient runtime files
 data/pending-alerts.json
 data/alert-state-next.json
+
+# Local secrets / credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+id_rsa
+id_rsa.*
+credentials.json
+credentials.*
+secrets.json
+secrets.*
+
+# Local tooling
+node_modules/
+_site/
+__pycache__/
+*.pyc
+.DS_Store
