@@ -2,6 +2,9 @@ name: Deploy dashboard to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    # Rebuild shortly after the 06:15 and 15:15 UTC data-refresh jobs.
+    - cron: '25 6,15 * * *'
   workflow_dispatch:
 
 permissions:
