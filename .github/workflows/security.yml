@@ -1,0 +1,37 @@
+name: Security checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  repository-hygiene:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Reject tracked credential files
+        shell: bash
+        run: |
+          set -euo pipefail
+          bad="$(git ls-files | grep -E '(^|/)(\.env($|\.)|id_rsa($|\.)|credentials\.(json|ya?ml)$|secrets\.(json|ya?ml)$)|\.(pem|key|p12|pfx|jks)$' || true)"
+          if [ -n "$bad" ]; then
+            echo "Potential credential files are tracked:"
+            echo "$bad"
+            exit 1
+          fi
+
+      - name: Check for private key material
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git grep -n -I -E -- 'BEGIN (RSA |EC |OPENSSH |DSA )?PRIVATE KEY' -- ':!*.md'; then
+            echo "Private key material detected."
+            exit 1
+          fi
