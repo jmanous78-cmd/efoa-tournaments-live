@@ -60,7 +60,7 @@ function notificationStatus(){
 function fireBrowserNotification(title,body,url){
  if(!state.browserAlerts||!("Notification" in window)||Notification.permission!=="granted")return;
  const n=new Notification(title,{body});
- n.onclick=()=>{window.focus();if(url)window.open(url,"_blank")};
+ n.onclick=()=>{window.focus();if(url){const w=window.open(url,"_blank","noopener,noreferrer");if(w)w.opener=null}};
 }
 function checkBrowserAlerts(list,{bootstrap=false}={}){
  if(!state.browserAlerts||!("Notification" in window)||Notification.permission!=="granted")return;
@@ -137,7 +137,7 @@ function deadlineHero(list){
    <div class="countdown">${countdownText(h)}</div>
    <div class="deadline-date">${fmtDT(d.value)}</div>
    <div>${e.title} — ${e.venue||e.city||""}</div>
-   <div class="links">${e.registration_url?`<a target="_blank" href="${e.registration_url}">e-ΕΦΟΑ</a>`:""}${e.proclamation_url?`<a target="_blank" href="${e.proclamation_url}">Προκήρυξη</a>`:""}</div>
+   <div class="links">${e.registration_url?`<a target="_blank" rel="noopener noreferrer" href="${e.registration_url}">e-ΕΦΟΑ</a>`:""}${e.proclamation_url?`<a target="_blank" rel="noopener noreferrer" href="${e.proclamation_url}">Προκήρυξη</a>`:""}</div>
   </div>`;
  };
  box.className="card hero";
@@ -162,7 +162,7 @@ function render(){
   <h3>${e.title}</h3>
   <div class="meta">${fmt(e.start)} – ${fmt(e.end)} · ${e.venue||"Έδρα προς ανακοίνωση"}${e.city?" · "+e.city:""}</div>
   <div class="badges"><span class="badge">${e.level}</span>${cats(e).map(c=>`<span class="badge">${c}</span>`).join("")}${e.categories_status==="inferred-current-year"?'<span class="badge warn-b">Κατηγορίες προς επιβεβαίωση</span>':""}${mine(e)?'<span class="badge mine">★ Δική μου</span>':""}${deadlineEntries(e).map(deadlineBadge).join("")}</div>
-  <div class="links">${e.registration_url?`<a target="_blank" href="${e.registration_url}">e-ΕΦΟΑ</a>`:""}${e.source_url?`<a target="_blank" href="${e.source_url}">Πηγή</a>`:""}${e.proclamation_url?`<a target="_blank" href="${e.proclamation_url}">Προκήρυξη</a>`:""}</div>
+  <div class="links">${e.registration_url?`<a target="_blank" rel="noopener noreferrer" href="${e.registration_url}">e-ΕΦΟΑ</a>`:""}${e.source_url?`<a target="_blank" rel="noopener noreferrer" href="${e.source_url}">Πηγή</a>`:""}${e.proclamation_url?`<a target="_blank" rel="noopener noreferrer" href="${e.proclamation_url}">Προκήρυξη</a>`:""}</div>
  </article>`).join("")||'<div class="event">Δεν βρέθηκαν τουρνουά.</div>';
  markers.clearLayers();
  list.filter(e=>e.lat!=null&&e.lon!=null).forEach(e=>L.marker([e.lat,e.lon]).bindPopup(`<b>${e.title}</b><br>${e.venue||""}<br>${fmt(e.start)}–${fmt(e.end)}`).addTo(markers));
