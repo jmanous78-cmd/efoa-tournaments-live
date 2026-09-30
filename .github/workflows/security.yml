@@ -43,7 +43,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git grep -n -I -- 'tile.openstreetmap.org'; then
+          if git grep -n -I -- 'tile.openstreetmap.org' -- ':!.github/workflows/security.yml'; then
             echo "Do not use the community OSM standard tile servers directly."
             exit 1
           fi
