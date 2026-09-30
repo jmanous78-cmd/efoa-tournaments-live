@@ -3,26 +3,59 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 concurrency:
   group: pages
   cancel-in-progress: true
+
 jobs:
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 6
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Install pinned frontend dependencies
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Build minimal public site
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site/assets _site/data _site/config
+          mkdir -p _site/vendor/leaflet/images _site/vendor/leaflet-markercluster
+
+          cp index.html _site/
+          cp assets/app.js assets/style.css _site/assets/
+          cp data/tournaments.json data/efoa-tournaments.ics _site/data/
+          cp config/alerts.json _site/config/
+
+          cp node_modules/leaflet/dist/leaflet.js _site/vendor/leaflet/
+          cp node_modules/leaflet/dist/leaflet.css _site/vendor/leaflet/
+          cp -R node_modules/leaflet/dist/images/. _site/vendor/leaflet/images/
+
+          cp node_modules/leaflet.markercluster/dist/leaflet.markercluster.js _site/vendor/leaflet-markercluster/
+          cp node_modules/leaflet.markercluster/dist/MarkerCluster.css _site/vendor/leaflet-markercluster/
+          cp node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css _site/vendor/leaflet-markercluster/
+
+          touch _site/.nojekyll
+
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
         with:
           enablement: true
-      - uses: actions/upload-pages-artifact@v3
+
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
         with:
-          path: '.'
+          path: '_site'
+
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e
