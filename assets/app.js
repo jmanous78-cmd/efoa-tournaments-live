@@ -1,3 +1,4 @@
+import * as maplibregl from "../vendor/maplibre/maplibre-gl.mjs";
 const DATA="data/tournaments.json", KEY="efoa-live-v5", NOTIFY_KEY="efoa-browser-alerts-v2", ATH={lat:37.9838,lon:23.7275};
 const ALERT_CONFIG="config/alerts.json";
 let events=[],map,mapReady=false,currentMapEvents=[];

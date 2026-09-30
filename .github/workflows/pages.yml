@@ -42,8 +42,7 @@ jobs:
           cp data/tournaments.json data/efoa-tournaments.ics _site/data/
           cp config/alerts.json _site/config/
 
-          cp node_modules/maplibre-gl/dist/maplibre-gl.js _site/vendor/maplibre/
-          cp node_modules/maplibre-gl/dist/maplibre-gl.css _site/vendor/maplibre/
+          cp -R node_modules/maplibre-gl/dist/. _site/vendor/maplibre/
 
           touch _site/.nojekyll
 
