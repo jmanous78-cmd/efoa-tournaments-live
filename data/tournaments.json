@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-01T09:39:27+03:00",
+    "updated_at": "2026-10-01T18:33:36+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -11,10 +11,10 @@
     ],
     "schema_version": 4,
     "counts": {
-      "e3": 11,
+      "e3": 12,
       "e1e2": 0,
-      "eefoa": 15,
-      "total": 16
+      "eefoa": 16,
+      "total": 17
     },
     "eefoa_diagnostics": {
       "api": {
@@ -32,7 +32,7 @@
           {
             "current": "0",
             "status": 200,
-            "count": 955
+            "count": 959
           }
         ],
         "chosen_current": "0",
@@ -66,9 +66,10 @@
             "Κ18"
           ]
         },
-        "domestic_records": 15,
+        "domestic_records": 16,
         "sample_titles": [
           "Ε1 5ο 42η (Ε)",
+          "Ε3 Open 41η (Β)",
           "Ε3 Open 41η (Θ)",
           "Ε3 Open 40η (Ε)",
           "Ε3 Open 40η (Ζ)",
@@ -76,8 +77,7 @@
           "Ε3 Open 40η (ΣΤ)",
           "Ε3 Open 39η (Δ)",
           "Ε3 Open 39η (ΣΤ)",
-          "Ε3 Open 39η (Ζ)",
-          "Ε3 Open 39η (Ε)"
+          "Ε3 Open 39η (Ζ)"
         ]
       }
     }
@@ -524,39 +524,37 @@
       ]
     },
     {
-      "id": "eefoa-3736",
-      "level": "E1",
-      "title": "Ε1 5ο 42η (Ε)",
+      "id": "e3-2026-w41-d5bc80594b36",
+      "level": "E3",
+      "title": "Ε3 41ης εβδομάδας – Β΄ Ένωση",
       "categories": [
-        "Α12",
         "Α14",
-        "Α16",
-        "Α18",
-        "Κ12",
-        "Κ14",
-        "Κ16",
-        "Κ18"
+        "Κ14"
       ],
-      "union": "Ε΄ Ένωση",
+      "union": "Β΄ Ένωση",
       "unions": [
-        "Ε΄ Ένωση"
+        "Β΄ Ένωση"
       ],
-      "week": 42,
-      "start": "2026-10-16",
-      "end": "2026-10-20",
-      "date_precision": "annual-program+eefoa",
-      "venue": "Λάρισα – ακριβής σύλλογος προς ανακοίνωση",
-      "city": "Λάρισα",
+      "week": 41,
+      "start": "2026-10-10",
+      "end": "2026-10-11",
+      "date_precision": "proclamation",
+      "venue": "ΑΑ ΑΛΜΠΑΤΡΟΣ",
+      "city": "",
       "lat": null,
       "lon": null,
-      "registration_deadline": "2026-10-08T15:00+03:00",
-      "payment_deadline": "2026-10-12T15:00+03:00",
+      "registration_deadline": "2026-10-06T15:00+03:00",
+      "payment_deadline": "2026-10-07T15:00+03:00",
       "status": "confirmed",
-      "source_url": "https://efoa.gr/ta-athlemata-mas/tenis/teleutaia-nea-tennis/3358-e-ephoa-kai-e-choregos-babolat-greece-parousiazoun-to-babolat-cup-os-epibrabeuse-dyo-koryphaion-athleton-u12",
-      "proclamation_url": null,
+      "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
+      "proclamation_url": "https://drive.google.com/file/d/1PlTNnm7OTrHpk0l1-63_00yB2aFZwTbP/view?usp=drive_link",
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api",
-      "location_source": "official-announcement-city"
+      "source": "efoa-union-page",
+      "sources": [
+        "https://e-efoa.gr/admin/tournamentsview/list"
+      ],
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "eefoa-3728",
@@ -581,6 +579,41 @@
       "registration_deadline_source": "competition-rules",
       "payment_deadline": "2026-10-14T15:00+03:00",
       "payment_deadline_source": "competition-rules"
+    },
+    {
+      "id": "eefoa-3736",
+      "level": "E1",
+      "title": "Ε1 5ο 42η (Ε)",
+      "categories": [
+        "Α12",
+        "Α14",
+        "Α16",
+        "Α18",
+        "Κ12",
+        "Κ14",
+        "Κ16",
+        "Κ18"
+      ],
+      "union": "Ε΄ Ένωση",
+      "unions": [
+        "Ε΄ Ένωση"
+      ],
+      "week": 42,
+      "start": "2026-10-16",
+      "end": "2026-10-20",
+      "date_precision": "eefoa-start/week-end",
+      "venue": "Λάρισα – ακριβής σύλλογος προς ανακοίνωση",
+      "city": "Λάρισα",
+      "lat": null,
+      "lon": null,
+      "registration_deadline": "2026-10-08T15:00+03:00",
+      "payment_deadline": "2026-10-12T15:00+03:00",
+      "status": "confirmed",
+      "source_url": "https://efoa.gr/ta-athlemata-mas/tenis/teleutaia-nea-tennis/3358-e-ephoa-kai-e-choregos-babolat-greece-parousiazoun-to-babolat-cup-os-epibrabeuse-dyo-koryphaion-athleton-u12",
+      "proclamation_url": null,
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "source": "e-efoa-api",
+      "location_source": "official-announcement-city"
     },
     {
       "id": "e2-5-2026",
