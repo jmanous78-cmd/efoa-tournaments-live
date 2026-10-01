@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-09-30T18:35:05+03:00",
+    "updated_at": "2026-10-01T09:39:27+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -13,7 +13,7 @@
     "counts": {
       "e3": 11,
       "e1e2": 0,
-      "eefoa": 14,
+      "eefoa": 15,
       "total": 16
     },
     "eefoa_diagnostics": {
@@ -27,16 +27,26 @@
           {
             "current": "1",
             "status": 200,
-            "count": 26
+            "count": 44
           },
           {
             "current": "0",
             "status": 200,
-            "count": 939
+            "count": 955
           }
         ],
         "chosen_current": "0",
         "category_templates": {
+          "E1": [
+            "Α12",
+            "Α14",
+            "Α16",
+            "Α18",
+            "Κ12",
+            "Κ14",
+            "Κ16",
+            "Κ18"
+          ],
           "E3": [
             "Α12",
             "Α14",
@@ -54,20 +64,11 @@
             "Κ14",
             "Κ16",
             "Κ18"
-          ],
-          "E1": [
-            "Α12",
-            "Α14",
-            "Α16",
-            "Α18",
-            "Κ12",
-            "Κ14",
-            "Κ16",
-            "Κ18"
           ]
         },
-        "domestic_records": 14,
+        "domestic_records": 15,
         "sample_titles": [
+          "Ε1 5ο 42η (Ε)",
           "Ε3 Open 41η (Θ)",
           "Ε3 Open 40η (Ε)",
           "Ε3 Open 40η (Ζ)",
@@ -76,8 +77,7 @@
           "Ε3 Open 39η (Δ)",
           "Ε3 Open 39η (ΣΤ)",
           "Ε3 Open 39η (Ζ)",
-          "Ε3 Open 39η (Ε)",
-          "Ε3 Open 39η (Γ)"
+          "Ε3 Open 39η (Ε)"
         ]
       }
     }
@@ -524,9 +524,9 @@
       ]
     },
     {
-      "id": "e1-5-2026",
+      "id": "eefoa-3736",
       "level": "E1",
-      "title": "Ε1 5ο",
+      "title": "Ε1 5ο 42η (Ε)",
       "categories": [
         "Α12",
         "Α14",
@@ -541,21 +541,22 @@
       "unions": [
         "Ε΄ Ένωση"
       ],
+      "week": 42,
       "start": "2026-10-16",
       "end": "2026-10-20",
+      "date_precision": "annual-program+eefoa",
       "venue": "Λάρισα – ακριβής σύλλογος προς ανακοίνωση",
       "city": "Λάρισα",
       "lat": null,
       "lon": null,
-      "status": "planned",
-      "source_url": "https://efoa.gr/ta-athlemata-mas/tenis/teleutaia-nea-tennis/3358-e-ephoa-kai-e-choregos-babolat-greece-parousiazoun-to-babolat-cup-os-epibrabeuse-dyo-koryphaion-athleton-u12",
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "categories_status": "inferred-current-year",
-      "location_source": "official-announcement-city",
       "registration_deadline": "2026-10-08T15:00+03:00",
-      "registration_deadline_source": "competition-rules",
       "payment_deadline": "2026-10-12T15:00+03:00",
-      "payment_deadline_source": "competition-rules"
+      "status": "confirmed",
+      "source_url": "https://efoa.gr/ta-athlemata-mas/tenis/teleutaia-nea-tennis/3358-e-ephoa-kai-e-choregos-babolat-greece-parousiazoun-to-babolat-cup-os-epibrabeuse-dyo-koryphaion-athleton-u12",
+      "proclamation_url": null,
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "source": "e-efoa-api",
+      "location_source": "official-announcement-city"
     },
     {
       "id": "eefoa-3728",
