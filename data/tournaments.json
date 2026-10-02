@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-01T18:33:36+03:00",
+    "updated_at": "2026-10-02T09:37:50+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -552,9 +552,7 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
-      ],
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      ]
     },
     {
       "id": "eefoa-3728",
