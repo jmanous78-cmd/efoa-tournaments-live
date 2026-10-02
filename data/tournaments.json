@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-02T09:37:50+03:00",
+    "updated_at": "2026-10-02T18:34:08+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -13,8 +13,8 @@
     "counts": {
       "e3": 12,
       "e1e2": 0,
-      "eefoa": 16,
-      "total": 17
+      "eefoa": 17,
+      "total": 18
     },
     "eefoa_diagnostics": {
       "api": {
@@ -32,7 +32,7 @@
           {
             "current": "0",
             "status": 200,
-            "count": 959
+            "count": 963
           }
         ],
         "chosen_current": "0",
@@ -66,18 +66,18 @@
             "Κ18"
           ]
         },
-        "domestic_records": 16,
+        "domestic_records": 17,
         "sample_titles": [
           "Ε1 5ο 42η (Ε)",
+          "Ε3 Open 41η (Ζ)",
           "Ε3 Open 41η (Β)",
           "Ε3 Open 41η (Θ)",
           "Ε3 Open 40η (Ε)",
-          "Ε3 Open 40η (Ζ)",
+          "Ε3 Open 40η (Ζ) - ΑΚΥΡΟ",
           "Ε3 Open 40η (Δ)",
           "Ε3 Open 40η (ΣΤ)",
           "Ε3 Open 39η (Δ)",
-          "Ε3 Open 39η (ΣΤ)",
-          "Ε3 Open 39η (Ζ)"
+          "Ε3 Open 39η (ΣΤ)"
         ]
       }
     }
@@ -553,6 +553,38 @@
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
       ]
+    },
+    {
+      "id": "eefoa-3741",
+      "level": "E3",
+      "title": "Ε3 Open 41η (Ζ)",
+      "categories": [
+        "Α14",
+        "Κ14"
+      ],
+      "union": "Ζ΄ Ένωση",
+      "unions": [
+        "Ζ΄ Ένωση"
+      ],
+      "week": 41,
+      "start": "2026-10-10",
+      "end": "2026-10-11",
+      "date_precision": "eefoa-start/week-end",
+      "venue": "ΤΕΝ ΑΚΑΔ ΚΡΗΤΗΣ",
+      "city": "Ηράκλειο",
+      "lat": 35.33908,
+      "lon": 25.1332843,
+      "registration_deadline": "2026-10-06T15:00+03:00",
+      "payment_deadline": "2026-10-07T15:00+03:00",
+      "status": "confirmed",
+      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "proclamation_url": null,
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "source": "e-efoa-api",
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules",
+      "location_source": "official-efoa-city+nominatim",
+      "location_accuracy": "city"
     },
     {
       "id": "eefoa-3728",
