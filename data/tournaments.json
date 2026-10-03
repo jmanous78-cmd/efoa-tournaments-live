@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-02T18:34:08+03:00",
+    "updated_at": "2026-10-03T09:45:53+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -27,7 +27,7 @@
           {
             "current": "1",
             "status": 200,
-            "count": 44
+            "count": 48
           },
           {
             "current": "0",
@@ -580,11 +580,7 @@
       "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
       "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api",
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules",
-      "location_source": "official-efoa-city+nominatim",
-      "location_accuracy": "city"
+      "source": "e-efoa-api"
     },
     {
       "id": "eefoa-3728",
