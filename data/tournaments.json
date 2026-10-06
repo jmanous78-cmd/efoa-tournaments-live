@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-05T18:35:51+03:00",
+    "updated_at": "2026-10-06T09:39:08+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -27,7 +27,7 @@
           {
             "current": "1",
             "status": 200,
-            "count": 48
+            "count": 30
           },
           {
             "current": "0",
