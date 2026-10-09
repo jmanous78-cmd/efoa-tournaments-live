@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-08T18:35:55+03:00",
+    "updated_at": "2026-10-09T09:40:46+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -13,7 +13,7 @@
     "counts": {
       "e3": 6,
       "e1e2": 0,
-      "eefoa": 15,
+      "eefoa": 16,
       "total": 16
     },
     "eefoa_diagnostics": {
@@ -32,7 +32,7 @@
           {
             "current": "0",
             "status": 200,
-            "count": 963
+            "count": 967
           }
         ],
         "chosen_current": "0",
@@ -66,9 +66,10 @@
             "Κ18"
           ]
         },
-        "domestic_records": 15,
+        "domestic_records": 16,
         "sample_titles": [
           "Ε1 5ο 42η (Ε)",
+          "Ε3 Open 42η (ΣΤ)",
           "Ε3 Open 41η (Β)",
           "Ε3 Open 41η (Ζ)",
           "Ε3 Open 41η (Θ)",
@@ -76,8 +77,7 @@
           "Ε3 Open 40η (Ζ) - ΑΚΥΡΟ",
           "Ε3 Open 40η (Δ)",
           "Ε3 Open 40η (ΣΤ)",
-          "Ε3 Open 39η (Δ)",
-          "Ε3 Open 39η (ΣΤ)"
+          "Ε3 Open 39η (Δ)"
         ]
       }
     }
@@ -495,30 +495,6 @@
       "source": "e-efoa-api"
     },
     {
-      "id": "eefoa-3728",
-      "level": "E3",
-      "title": "Ε3 ΑΓ Αργοναύτες 42η (Β)",
-      "categories": [],
-      "union": "",
-      "unions": [],
-      "start": "2026-10-16",
-      "end": "2026-10-16",
-      "date_precision": "eefoa-start",
-      "venue": "ΟΑ ΚΙΛΚΙΣ",
-      "city": "",
-      "lat": null,
-      "lon": null,
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api",
-      "registration_deadline": "2026-10-13T15:00+03:00",
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline": "2026-10-14T15:00+03:00",
-      "payment_deadline_source": "competition-rules"
-    },
-    {
       "id": "eefoa-3736",
       "level": "E1",
       "title": "Ε1 5ο 42η (Ε)",
@@ -552,6 +528,36 @@
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
       "source": "e-efoa-api",
       "location_source": "official-announcement-city"
+    },
+    {
+      "id": "eefoa-3745",
+      "level": "E3",
+      "title": "Ε3 Open 42η (ΣΤ)",
+      "categories": [
+        "Α12",
+        "Α16",
+        "Κ12",
+        "Κ16"
+      ],
+      "union": "ΣΤ΄ Ένωση",
+      "unions": [
+        "ΣΤ΄ Ένωση"
+      ],
+      "week": 42,
+      "start": "2026-10-17",
+      "end": "2026-10-18",
+      "date_precision": "eefoa-start/week-end",
+      "venue": "ΣΑ ΤΡΙΠΟΛΗΣ",
+      "city": "",
+      "lat": null,
+      "lon": null,
+      "registration_deadline": "2026-10-13T15:00+03:00",
+      "payment_deadline": "2026-10-14T15:00+03:00",
+      "status": "confirmed",
+      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "proclamation_url": null,
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "source": "e-efoa-api"
     },
     {
       "id": "e2-5-2026",
