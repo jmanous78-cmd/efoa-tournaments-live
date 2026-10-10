@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-10T09:38:04+03:00",
+    "updated_at": "2026-10-10T18:30:33+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -139,9 +139,7 @@
       "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
       "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api",
-      "location_source": "official-efoa-address+nominatim",
-      "location_accuracy": "venue"
+      "source": "e-efoa-api"
     },
     {
       "id": "eefoa-3708",
