@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-09T18:33:56+03:00",
+    "updated_at": "2026-10-10T09:38:04+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -13,8 +13,8 @@
     "counts": {
       "e3": 6,
       "e1e2": 0,
-      "eefoa": 16,
-      "total": 16
+      "eefoa": 14,
+      "total": 15
     },
     "eefoa_diagnostics": {
       "api": {
@@ -66,7 +66,7 @@
             "Κ18"
           ]
         },
-        "domestic_records": 16,
+        "domestic_records": 14,
         "sample_titles": [
           "Ε1 5ο 42η (Ε)",
           "Ε3 Open 42η (ΣΤ)",
@@ -83,36 +83,6 @@
     }
   },
   "tournaments": [
-    {
-      "id": "eefoa-3704",
-      "level": "E3",
-      "title": "Ε3 Open 39ης (Η)",
-      "categories": [
-        "Α12",
-        "Α16",
-        "Κ12",
-        "Κ16"
-      ],
-      "union": "Η΄ Ένωση",
-      "unions": [
-        "Η΄ Ένωση"
-      ],
-      "week": 39,
-      "start": "2026-09-25",
-      "end": "2026-09-27",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΑΕ ΠΟΡΤΟ ΡΑΦΤΗ",
-      "city": "",
-      "lat": null,
-      "lon": null,
-      "registration_deadline": "2026-09-22T15:00+03:00",
-      "payment_deadline": "2026-09-23T15:00+03:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
     {
       "id": "eefoa-3698",
       "level": "E3",
@@ -147,10 +117,8 @@
       "title": "Ε3 Open 39η (Δ)",
       "categories": [
         "Α12",
-        "Α14",
         "Α16",
         "Κ12",
-        "Κ14",
         "Κ16"
       ],
       "union": "Δ΄ Ένωση",
@@ -161,10 +129,10 @@
       "start": "2026-09-26",
       "end": "2026-09-27",
       "date_precision": "eefoa-start/week-end",
-      "venue": "ΑΟΑ ΗΛΙΟΥΠΟΛΗΣ",
-      "city": "",
-      "lat": null,
-      "lon": null,
+      "venue": "ΟΑ ΑΡΤΑΣ",
+      "city": "Άρτα",
+      "lat": 39.1591002,
+      "lon": 20.9825383,
       "registration_deadline": "2026-09-22T15:00+03:00",
       "payment_deadline": "2026-09-23T15:00+03:00",
       "status": "confirmed",
@@ -172,9 +140,8 @@
       "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
       "source": "e-efoa-api",
-      "sources": [
-        "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      "location_source": "official-efoa-address+nominatim",
+      "location_accuracy": "venue"
     },
     {
       "id": "eefoa-3708",
