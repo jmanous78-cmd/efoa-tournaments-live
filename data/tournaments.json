@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-11T18:31:28+03:00",
+    "updated_at": "2026-10-12T09:46:25+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -11,7 +11,7 @@
     ],
     "schema_version": 4,
     "counts": {
-      "e3": 6,
+      "e3": 2,
       "e1e2": 0,
       "eefoa": 9,
       "total": 10
@@ -27,7 +27,7 @@
           {
             "current": "1",
             "status": 200,
-            "count": 44
+            "count": 32
           },
           {
             "current": "0",
@@ -83,13 +83,11 @@
   },
   "tournaments": [
     {
-      "id": "e3-2026-w40-8707115edc56",
+      "id": "eefoa-3720",
       "level": "E3",
-      "title": "Ε3 40ης εβδομάδας – Δ΄ Ένωση",
+      "title": "Ε3 Open 40η (Δ)",
       "categories": [
-        "Α10",
         "Α14",
-        "Κ10",
         "Κ14"
       ],
       "union": "Δ΄ Ένωση",
@@ -107,18 +105,15 @@
       "registration_deadline": "2026-09-29T15:00+03:00",
       "payment_deadline": "2026-09-30T15:00+03:00",
       "status": "confirmed",
-      "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
-      "proclamation_url": "https://drive.google.com/file/d/1LAn8BQuEkNTnCeq0TONIDvWNIBHD0phe/view?usp=drive_link",
+      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "efoa-union-page",
-      "sources": [
-        "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      "source": "e-efoa-api"
     },
     {
-      "id": "e3-2026-w40-09146c442d92",
+      "id": "eefoa-3709",
       "level": "E3",
-      "title": "Ε3 40ης εβδομάδας – Ε΄ Ένωση",
+      "title": "Ε3 Open 40η (Ε)",
       "categories": [
         "Α14",
         "Κ14"
@@ -138,22 +133,17 @@
       "registration_deadline": "2026-09-29T15:00+03:00",
       "payment_deadline": "2026-09-30T15:00+03:00",
       "status": "confirmed",
-      "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
-      "proclamation_url": "https://drive.google.com/file/d/1sNL6rv3MQtkvxhebQdoRRnuY78qfNHdc/view?usp=drive_link",
+      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "efoa-union-page",
-      "sources": [
-        "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      "source": "e-efoa-api"
     },
     {
-      "id": "e3-2026-w40-984fc27e74bd",
+      "id": "eefoa-3719",
       "level": "E3",
-      "title": "Ε3 40ης εβδομάδας – Ζ΄ Ένωση",
+      "title": "Ε3 Open 40η (Ζ) - ΑΚΥΡΟ",
       "categories": [
-        "Α10",
         "Α14",
-        "Κ10",
         "Κ14"
       ],
       "union": "Ζ΄ Ένωση",
@@ -171,27 +161,18 @@
       "registration_deadline": "2026-09-29T15:00+03:00",
       "payment_deadline": "2026-09-30T15:00+03:00",
       "status": "confirmed",
-      "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
-      "proclamation_url": "https://drive.google.com/file/d/1DX1xKd4igarJtMn5n9xDyem2YwhgPoJr/view?usp=drive_link",
+      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "efoa-union-page",
-      "sources": [
-        "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      "source": "e-efoa-api"
     },
     {
-      "id": "e3-2026-w40-300baf7c04c2",
+      "id": "eefoa-3722",
       "level": "E3",
-      "title": "Ε3 40ης εβδομάδας – ΣΤ΄ Ένωση",
+      "title": "Ε3 Open 40η (ΣΤ)",
       "categories": [
-        "Α10",
-        "Α12",
         "Α14",
-        "Α18",
-        "Κ10",
-        "Κ12",
-        "Κ14",
-        "Κ18"
+        "Κ14"
       ],
       "union": "ΣΤ΄ Ένωση",
       "unions": [
@@ -200,7 +181,7 @@
       "week": 40,
       "start": "2026-10-03",
       "end": "2026-10-04",
-      "date_precision": "proclamation",
+      "date_precision": "eefoa-start/week-end",
       "venue": "ΟΑ ΞΥΛΟΚΑΣΤΡΟΥ ΣΥΘΑΣ",
       "city": "Ξυλόκαστρο",
       "lat": 38.078321,
@@ -208,13 +189,10 @@
       "registration_deadline": "2026-09-29T15:00+03:00",
       "payment_deadline": "2026-09-30T15:00+03:00",
       "status": "confirmed",
-      "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
-      "proclamation_url": "https://drive.google.com/file/d/1aTt694jFgD5flZ8f4QMRF_DCkiYhCqKZ/view?usp=drive_link",
+      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "efoa-union-page",
-      "sources": [
-        "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      "source": "e-efoa-api"
     },
     {
       "id": "e3-2026-w41-c871b637cd66",
