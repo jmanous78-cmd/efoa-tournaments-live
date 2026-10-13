@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-13T09:44:40+03:00",
+    "updated_at": "2026-10-13T18:37:55+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -11,10 +11,10 @@
     ],
     "schema_version": 4,
     "counts": {
-      "e3": 2,
+      "e3": 3,
       "e1e2": 0,
-      "eefoa": 9,
-      "total": 10
+      "eefoa": 12,
+      "total": 12
     },
     "eefoa_diagnostics": {
       "api": {
@@ -32,21 +32,11 @@
           {
             "current": "0",
             "status": 200,
-            "count": 967
+            "count": 999
           }
         ],
         "chosen_current": "0",
         "category_templates": {
-          "E1": [
-            "Α12",
-            "Α14",
-            "Α16",
-            "Α18",
-            "Κ12",
-            "Κ14",
-            "Κ16",
-            "Κ18"
-          ],
           "E3": [
             "Α12",
             "Α14",
@@ -64,19 +54,30 @@
             "Κ14",
             "Κ16",
             "Κ18"
+          ],
+          "E1": [
+            "Α12",
+            "Α14",
+            "Α16",
+            "Α18",
+            "Κ12",
+            "Κ14",
+            "Κ16",
+            "Κ18"
           ]
         },
-        "domestic_records": 9,
+        "domestic_records": 12,
         "sample_titles": [
-          "Ε1 5ο 42η (Ε)",
+          "Ε3 Open 44η (Η)",
+          "Ε2 5ο 43η (Β)",
+          "Ε2 5ο 43η (Ζ)",
           "Ε3 Open 42η (ΣΤ)",
+          "Ε1 5ο 42η (Ε)",
           "Ε3 Open 41η (Β)",
           "Ε3 Open 41η (Ζ)",
           "Ε3 Open 41η (Θ)",
           "Ε3 Open 40η (Ε)",
-          "Ε3 Open 40η (Ζ) - ΑΚΥΡΟ",
-          "Ε3 Open 40η (Δ)",
-          "Ε3 Open 40η (ΣΤ)"
+          "Ε3 Open 40η (Ζ) - ΑΚΥΡΟ"
         ]
       }
     }
@@ -354,9 +355,9 @@
       "source": "e-efoa-api"
     },
     {
-      "id": "e2-5-2026",
+      "id": "eefoa-3748",
       "level": "E2",
-      "title": "Ε2 5ο",
+      "title": "Ε2 5ο 43η (Β)",
       "categories": [
         "Α12",
         "Α14",
@@ -367,24 +368,93 @@
         "Κ16",
         "Κ18"
       ],
-      "union": "Β΄ & Ζ΄ Ένωση",
+      "union": "Β΄ Ένωση",
       "unions": [
-        "Β΄ Ένωση",
-        "Ζ΄ Ένωση"
+        "Β΄ Ένωση"
       ],
+      "week": 43,
       "start": "2026-10-23",
       "end": "2026-10-27",
-      "venue": "Έδρες προς ανακοίνωση",
+      "date_precision": "annual-program+eefoa",
+      "venue": "ΟΑ ΛΑΓΚΑΔΑ ΘΕΣ",
       "city": "",
       "lat": null,
       "lon": null,
-      "status": "planned",
-      "source_url": "https://efoa.gr/images/news/2026/Agonistiko%20Programma%20Antisphairises%202026.pdf",
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "categories_status": "inferred-current-year",
       "registration_deadline": "2026-10-15T15:00+03:00",
-      "registration_deadline_source": "competition-rules",
       "payment_deadline": "2026-10-19T15:00+03:00",
+      "status": "confirmed",
+      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "proclamation_url": null,
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "source": "e-efoa-api"
+    },
+    {
+      "id": "eefoa-3749",
+      "level": "E2",
+      "title": "Ε2 5ο 43η (Ζ)",
+      "categories": [
+        "Α12",
+        "Α14",
+        "Α16",
+        "Κ12",
+        "Κ14",
+        "Κ16"
+      ],
+      "union": "Ζ΄ Ένωση",
+      "unions": [
+        "Ζ΄ Ένωση"
+      ],
+      "week": 43,
+      "start": "2026-10-23",
+      "end": "2026-10-27",
+      "date_precision": "annual-program+eefoa",
+      "venue": "ΠΟ ΗΡΑΚΛΕΙΟΥ",
+      "city": "",
+      "lat": null,
+      "lon": null,
+      "registration_deadline": "2026-10-15T15:00+03:00",
+      "payment_deadline": "2026-10-19T15:00+03:00",
+      "status": "confirmed",
+      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "proclamation_url": null,
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "source": "e-efoa-api"
+    },
+    {
+      "id": "e3-2026-w44-55a3431328d7",
+      "level": "E3",
+      "title": "Ε3 44ης εβδομάδας – Η΄ Ένωση",
+      "categories": [
+        "Α10",
+        "Α12",
+        "Α14",
+        "Κ10",
+        "Κ12",
+        "Κ14"
+      ],
+      "union": "Η΄ Ένωση",
+      "unions": [
+        "Η΄ Ένωση"
+      ],
+      "week": 44,
+      "start": "2026-10-30",
+      "end": "2026-11-01",
+      "date_precision": "eefoa-start/week-end",
+      "venue": "ΣΑ ΡΑΦΗΝΑΣ",
+      "city": "",
+      "lat": null,
+      "lon": null,
+      "registration_deadline": "2026-10-27T15:00+02:00",
+      "payment_deadline": "2026-10-28T15:00+02:00",
+      "status": "confirmed",
+      "source_url": "https://efoa.gr/prokirykseis-enoseon-2026-e3-open-klp",
+      "proclamation_url": "https://drive.google.com/file/d/1j-NZgiN3yTaF9nDPij-9vIxDe_T8sy96/view?usp=drive_link",
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "source": "efoa-union-page",
+      "sources": [
+        "https://e-efoa.gr/admin/tournamentsview/list"
+      ],
+      "registration_deadline_source": "competition-rules",
       "payment_deadline_source": "competition-rules"
     }
   ]
