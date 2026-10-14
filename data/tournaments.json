@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-13T18:37:55+03:00",
+    "updated_at": "2026-10-14T10:00:06+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -13,8 +13,8 @@
     "counts": {
       "e3": 3,
       "e1e2": 0,
-      "eefoa": 12,
-      "total": 12
+      "eefoa": 13,
+      "total": 13
     },
     "eefoa_diagnostics": {
       "api": {
@@ -32,7 +32,7 @@
           {
             "current": "0",
             "status": 200,
-            "count": 999
+            "count": 1003
           }
         ],
         "chosen_current": "0",
@@ -66,8 +66,9 @@
             "Κ18"
           ]
         },
-        "domestic_records": 12,
+        "domestic_records": 13,
         "sample_titles": [
+          "Ε3 Open 44η (Δ)",
           "Ε3 Open 44η (Η)",
           "Ε2 5ο 43η (Β)",
           "Ε2 5ο 43η (Ζ)",
@@ -76,8 +77,7 @@
           "Ε3 Open 41η (Β)",
           "Ε3 Open 41η (Ζ)",
           "Ε3 Open 41η (Θ)",
-          "Ε3 Open 40η (Ε)",
-          "Ε3 Open 40η (Ζ) - ΑΚΥΡΟ"
+          "Ε3 Open 40η (Ε)"
         ]
       }
     }
@@ -373,9 +373,9 @@
         "Β΄ Ένωση"
       ],
       "week": 43,
-      "start": "2026-10-23",
-      "end": "2026-10-27",
-      "date_precision": "annual-program+eefoa",
+      "start": "2026-10-24",
+      "end": "2026-10-25",
+      "date_precision": "eefoa-start/week-end",
       "venue": "ΟΑ ΛΑΓΚΑΔΑ ΘΕΣ",
       "city": "",
       "lat": null,
@@ -405,9 +405,9 @@
         "Ζ΄ Ένωση"
       ],
       "week": 43,
-      "start": "2026-10-23",
-      "end": "2026-10-27",
-      "date_precision": "annual-program+eefoa",
+      "start": "2026-10-24",
+      "end": "2026-10-25",
+      "date_precision": "eefoa-start/week-end",
       "venue": "ΠΟ ΗΡΑΚΛΕΙΟΥ",
       "city": "",
       "lat": null,
@@ -453,7 +453,37 @@
       "source": "efoa-union-page",
       "sources": [
         "https://e-efoa.gr/admin/tournamentsview/list"
+      ]
+    },
+    {
+      "id": "eefoa-3750",
+      "level": "E3",
+      "title": "Ε3 Open 44η (Δ)",
+      "categories": [
+        "Α12",
+        "Α16",
+        "Κ12",
+        "Κ16"
       ],
+      "union": "Δ΄ Ένωση",
+      "unions": [
+        "Δ΄ Ένωση"
+      ],
+      "week": 44,
+      "start": "2026-10-31",
+      "end": "2026-11-01",
+      "date_precision": "eefoa-start/week-end",
+      "venue": "ΟΑ ΙΩΑΝΝΙΝΩΝ",
+      "city": "",
+      "lat": null,
+      "lon": null,
+      "registration_deadline": "2026-10-27T15:00+02:00",
+      "payment_deadline": "2026-10-28T15:00+02:00",
+      "status": "confirmed",
+      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "proclamation_url": null,
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "source": "e-efoa-api",
       "registration_deadline_source": "competition-rules",
       "payment_deadline_source": "competition-rules"
     }
