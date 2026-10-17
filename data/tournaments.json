@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-16T18:47:23+03:00",
+    "updated_at": "2026-10-17T09:55:14+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -553,9 +553,7 @@
       "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
       "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api",
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      "source": "e-efoa-api"
     }
   ]
 }
