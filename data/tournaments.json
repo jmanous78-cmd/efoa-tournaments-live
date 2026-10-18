@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-17T18:41:56+03:00",
+    "updated_at": "2026-10-18T09:54:33+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -13,8 +13,8 @@
     "counts": {
       "e3": 5,
       "e1e2": 0,
-      "eefoa": 15,
-      "total": 15
+      "eefoa": 11,
+      "total": 11
     },
     "eefoa_diagnostics": {
       "api": {
@@ -66,7 +66,7 @@
             "Κ18"
           ]
         },
-        "domestic_records": 15,
+        "domestic_records": 11,
         "sample_titles": [
           "Ε3 Open 45η (Ε)",
           "Ε3 Open 44η (Δ)",
@@ -83,118 +83,6 @@
     }
   },
   "tournaments": [
-    {
-      "id": "eefoa-3720",
-      "level": "E3",
-      "title": "Ε3 Open 40η (Δ)",
-      "categories": [
-        "Α14",
-        "Κ14"
-      ],
-      "union": "Δ΄ Ένωση",
-      "unions": [
-        "Δ΄ Ένωση"
-      ],
-      "week": 40,
-      "start": "2026-10-03",
-      "end": "2026-10-04",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΟΑ ΑΡΤΑΣ",
-      "city": "Άρτα",
-      "lat": 39.1591002,
-      "lon": 20.9825383,
-      "registration_deadline": "2026-09-29T15:00+03:00",
-      "payment_deadline": "2026-09-30T15:00+03:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
-    {
-      "id": "eefoa-3709",
-      "level": "E3",
-      "title": "Ε3 Open 40η (Ε)",
-      "categories": [
-        "Α14",
-        "Κ14"
-      ],
-      "union": "Ε΄ Ένωση",
-      "unions": [
-        "Ε΄ Ένωση"
-      ],
-      "week": 40,
-      "start": "2026-10-03",
-      "end": "2026-10-04",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΟΑ ΦΟΙΒΟΣ ΛΑΡΙΣΑΣ",
-      "city": "Λάρισα",
-      "lat": 39.637676,
-      "lon": 22.421193,
-      "registration_deadline": "2026-09-29T15:00+03:00",
-      "payment_deadline": "2026-09-30T15:00+03:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
-    {
-      "id": "eefoa-3719",
-      "level": "E3",
-      "title": "Ε3 Open 40η (Ζ) - ΑΚΥΡΟ",
-      "categories": [
-        "Α14",
-        "Κ14"
-      ],
-      "union": "Ζ΄ Ένωση",
-      "unions": [
-        "Ζ΄ Ένωση"
-      ],
-      "week": 40,
-      "start": "2026-10-03",
-      "end": "2026-10-04",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΤΕΝ ΑΚΑΔ ΚΡΗΤΗΣ",
-      "city": "Ηράκλειο",
-      "lat": 35.33908,
-      "lon": 25.1332843,
-      "registration_deadline": "2026-09-29T15:00+03:00",
-      "payment_deadline": "2026-09-30T15:00+03:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
-    {
-      "id": "eefoa-3722",
-      "level": "E3",
-      "title": "Ε3 Open 40η (ΣΤ)",
-      "categories": [
-        "Α14",
-        "Κ14"
-      ],
-      "union": "ΣΤ΄ Ένωση",
-      "unions": [
-        "ΣΤ΄ Ένωση"
-      ],
-      "week": 40,
-      "start": "2026-10-03",
-      "end": "2026-10-04",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΟΑ ΞΥΛΟΚΑΣΤΡΟΥ ΣΥΘΑΣ",
-      "city": "Ξυλόκαστρο",
-      "lat": 38.078321,
-      "lon": 22.6330434,
-      "registration_deadline": "2026-09-29T15:00+03:00",
-      "payment_deadline": "2026-09-30T15:00+03:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
     {
       "id": "e3-2026-w41-c871b637cd66",
       "level": "E3",
