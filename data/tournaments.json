@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-23T18:51:58+03:00",
+    "updated_at": "2026-10-24T09:57:20+03:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -13,8 +13,8 @@
     "counts": {
       "e3": 8,
       "e1e2": 0,
-      "eefoa": 17,
-      "total": 17
+      "eefoa": 16,
+      "total": 16
     },
     "eefoa_diagnostics": {
       "api": {
@@ -66,7 +66,7 @@
             "Κ18"
           ]
         },
-        "domestic_records": 17,
+        "domestic_records": 16,
         "sample_titles": [
           "Ε3 Open 46η (Ε)",
           "Ε3 Open 45η (Ε)",
@@ -83,38 +83,6 @@
     }
   },
   "tournaments": [
-    {
-      "id": "eefoa-3732",
-      "level": "E3",
-      "title": "Ε3 Open 41η (Θ)",
-      "categories": [
-        "Α12",
-        "Α14",
-        "Α16",
-        "Κ12",
-        "Κ14",
-        "Κ16"
-      ],
-      "union": "Θ΄ Ένωση",
-      "unions": [
-        "Θ΄ Ένωση"
-      ],
-      "week": 41,
-      "start": "2026-10-09",
-      "end": "2026-10-11",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΡΟΔΙΑΚΟΣ ΟΑ",
-      "city": "Ρόδος",
-      "lat": 36.4260075,
-      "lon": 28.2290247,
-      "registration_deadline": "2026-10-06T15:00+03:00",
-      "payment_deadline": "2026-10-07T15:00+03:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
     {
       "id": "eefoa-3737",
       "level": "E3",
