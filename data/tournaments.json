@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-24T18:44:38+03:00",
+    "updated_at": "2026-10-25T08:57:58+02:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -13,8 +13,8 @@
     "counts": {
       "e3": 8,
       "e1e2": 0,
-      "eefoa": 16,
-      "total": 16
+      "eefoa": 14,
+      "total": 14
     },
     "eefoa_diagnostics": {
       "api": {
@@ -27,7 +27,7 @@
           {
             "current": "1",
             "status": 200,
-            "count": 32
+            "count": 68
           },
           {
             "current": "0",
@@ -66,7 +66,7 @@
             "Κ18"
           ]
         },
-        "domestic_records": 16,
+        "domestic_records": 14,
         "sample_titles": [
           "Ε3 Open 46η (Ε)",
           "Ε3 Open 45η (Ε)",
@@ -83,62 +83,6 @@
     }
   },
   "tournaments": [
-    {
-      "id": "eefoa-3737",
-      "level": "E3",
-      "title": "Ε3 Open 41η (Β)",
-      "categories": [
-        "Α14",
-        "Κ14"
-      ],
-      "union": "Β΄ Ένωση",
-      "unions": [
-        "Β΄ Ένωση"
-      ],
-      "week": 41,
-      "start": "2026-10-10",
-      "end": "2026-10-11",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΑΑ ΑΛΜΠΑΤΡΟΣ",
-      "city": "",
-      "lat": null,
-      "lon": null,
-      "registration_deadline": "2026-10-06T15:00+03:00",
-      "payment_deadline": "2026-10-07T15:00+03:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
-    {
-      "id": "eefoa-3741",
-      "level": "E3",
-      "title": "Ε3 Open 41η (Ζ)",
-      "categories": [
-        "Α14",
-        "Κ14"
-      ],
-      "union": "Ζ΄ Ένωση",
-      "unions": [
-        "Ζ΄ Ένωση"
-      ],
-      "week": 41,
-      "start": "2026-10-10",
-      "end": "2026-10-11",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΤΕΝ ΑΚΑΔ ΚΡΗΤΗΣ",
-      "city": "Ηράκλειο",
-      "lat": 35.33908,
-      "lon": 25.1332843,
-      "registration_deadline": "2026-10-06T15:00+03:00",
-      "payment_deadline": "2026-10-07T15:00+03:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
     {
       "id": "eefoa-3736",
       "level": "E1",
