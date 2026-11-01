@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-10-31T21:19:42+02:00",
+    "updated_at": "2026-11-01T15:29:43+02:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -13,8 +13,8 @@
     "counts": {
       "e3": 8,
       "e1e2": 0,
-      "eefoa": 16,
-      "total": 16
+      "eefoa": 14,
+      "total": 14
     },
     "eefoa_diagnostics": {
       "api": {
@@ -66,7 +66,7 @@
             "Κ18"
           ]
         },
-        "domestic_records": 16,
+        "domestic_records": 14,
         "sample_titles": [
           "Ε3 Open 46η (Ε)",
           "Ε3 Open 45η (Ε)",
@@ -83,71 +83,6 @@
     }
   },
   "tournaments": [
-    {
-      "id": "eefoa-3736",
-      "level": "E1",
-      "title": "Ε1 5ο 42η (Ε)",
-      "categories": [
-        "Α12",
-        "Α14",
-        "Α16",
-        "Α18",
-        "Κ12",
-        "Κ14",
-        "Κ16",
-        "Κ18"
-      ],
-      "union": "Ε΄ Ένωση",
-      "unions": [
-        "Ε΄ Ένωση"
-      ],
-      "week": 42,
-      "start": "2026-10-16",
-      "end": "2026-10-20",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "Λάρισα – ακριβής σύλλογος προς ανακοίνωση",
-      "city": "Λάρισα",
-      "lat": null,
-      "lon": null,
-      "registration_deadline": "2026-10-08T15:00+03:00",
-      "payment_deadline": "2026-10-12T15:00+03:00",
-      "status": "confirmed",
-      "source_url": "https://efoa.gr/ta-athlemata-mas/tenis/teleutaia-nea-tennis/3358-e-ephoa-kai-e-choregos-babolat-greece-parousiazoun-to-babolat-cup-os-epibrabeuse-dyo-koryphaion-athleton-u12",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api",
-      "location_source": "official-announcement-city"
-    },
-    {
-      "id": "eefoa-3745",
-      "level": "E3",
-      "title": "Ε3 Open 42η (ΣΤ)",
-      "categories": [
-        "Α12",
-        "Α16",
-        "Κ12",
-        "Κ16"
-      ],
-      "union": "ΣΤ΄ Ένωση",
-      "unions": [
-        "ΣΤ΄ Ένωση"
-      ],
-      "week": 42,
-      "start": "2026-10-17",
-      "end": "2026-10-18",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΣΑ ΤΡΙΠΟΛΗΣ",
-      "city": "",
-      "lat": null,
-      "lon": null,
-      "registration_deadline": "2026-10-13T15:00+03:00",
-      "payment_deadline": "2026-10-14T15:00+03:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
     {
       "id": "eefoa-3748",
       "level": "E2",
