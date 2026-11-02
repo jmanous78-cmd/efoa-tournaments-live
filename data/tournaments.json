@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-11-01T21:43:23+02:00",
+    "updated_at": "2026-11-02T18:01:50+02:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -13,8 +13,8 @@
     "counts": {
       "e3": 8,
       "e1e2": 0,
-      "eefoa": 14,
-      "total": 14
+      "eefoa": 17,
+      "total": 17
     },
     "eefoa_diagnostics": {
       "api": {
@@ -32,7 +32,7 @@
           {
             "current": "0",
             "status": 200,
-            "count": 1105
+            "count": 1121
           }
         ],
         "chosen_current": "0",
@@ -66,18 +66,18 @@
             "Κ18"
           ]
         },
-        "domestic_records": 14,
+        "domestic_records": 17,
         "sample_titles": [
           "Ε3 Open 46η (Ε)",
+          "Ε3 Open 46η (Α)",
+          "Ε3 Open 46η (Β)",
+          "Ε3 Open 46η (ΣΤ)",
           "Ε3 Open 45η (Ε)",
           "Ε3 Open 45η (Ζ)",
           "Ε3 Open 45η (Δ)",
           "Ε3 Open 45η (ΣΤ)",
           "Ε3 Open 45η (IA)",
-          "Ε3 Open 45η (Η)",
-          "Ε3 Open 44η (Δ)",
-          "Ε3 Open 44η (Β)",
-          "Ε3 Open 44η (Α)"
+          "Ε3 Open 45η (Η)"
         ]
       }
     }
@@ -518,6 +518,70 @@
       "source": "e-efoa-api"
     },
     {
+      "id": "eefoa-3775",
+      "level": "E3",
+      "title": "Ε3 Open 46η (Α)",
+      "categories": [
+        "Α12",
+        "Α16",
+        "Κ12",
+        "Κ16"
+      ],
+      "union": "Α΄ Ένωση",
+      "unions": [
+        "Α΄ Ένωση"
+      ],
+      "week": 46,
+      "start": "2026-11-14",
+      "end": "2026-11-15",
+      "date_precision": "eefoa-start/week-end",
+      "venue": "ΣΕΡΡΑΪΚΟΣ ΟΑ",
+      "city": "",
+      "lat": null,
+      "lon": null,
+      "registration_deadline": "2026-11-10T15:00+02:00",
+      "payment_deadline": "2026-11-11T15:00+02:00",
+      "status": "confirmed",
+      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "proclamation_url": null,
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "source": "e-efoa-api",
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
+    },
+    {
+      "id": "eefoa-3776",
+      "level": "E3",
+      "title": "Ε3 Open 46η (Β)",
+      "categories": [
+        "Α12",
+        "Α16",
+        "Κ12",
+        "Κ16"
+      ],
+      "union": "Β΄ Ένωση",
+      "unions": [
+        "Β΄ Ένωση"
+      ],
+      "week": 46,
+      "start": "2026-11-14",
+      "end": "2026-11-15",
+      "date_precision": "eefoa-start/week-end",
+      "venue": "ΓΣ ΕΛΕΥΘ ΚΟΡΔ ΑΡΓΟΝΑΥΤΕΣ",
+      "city": "",
+      "lat": null,
+      "lon": null,
+      "registration_deadline": "2026-11-10T15:00+02:00",
+      "payment_deadline": "2026-11-11T15:00+02:00",
+      "status": "confirmed",
+      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "proclamation_url": null,
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "source": "e-efoa-api",
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
+    },
+    {
       "id": "eefoa-3755",
       "level": "E3",
       "title": "Ε3 Open 46η (Ε)",
@@ -544,6 +608,38 @@
       "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
       "source": "e-efoa-api"
+    },
+    {
+      "id": "eefoa-3777",
+      "level": "E3",
+      "title": "Ε3 Open 46η (ΣΤ)",
+      "categories": [
+        "Α12",
+        "Α16",
+        "Κ12",
+        "Κ16"
+      ],
+      "union": "ΣΤ΄ Ένωση",
+      "unions": [
+        "ΣΤ΄ Ένωση"
+      ],
+      "week": 46,
+      "start": "2026-11-14",
+      "end": "2026-11-15",
+      "date_precision": "eefoa-start/week-end",
+      "venue": "ΣΤ ΕΝΩΣΗ",
+      "city": "",
+      "lat": null,
+      "lon": null,
+      "registration_deadline": "2026-11-10T15:00+02:00",
+      "payment_deadline": "2026-11-11T15:00+02:00",
+      "status": "confirmed",
+      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "proclamation_url": null,
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "source": "e-efoa-api",
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     }
   ]
 }
