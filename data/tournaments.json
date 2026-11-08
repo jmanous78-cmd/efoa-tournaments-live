@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-11-07T21:26:57+02:00",
+    "updated_at": "2026-11-08T15:29:53+02:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -13,8 +13,8 @@
     "counts": {
       "e3": 18,
       "e1e2": 0,
-      "eefoa": 20,
-      "total": 20
+      "eefoa": 18,
+      "total": 18
     },
     "eefoa_diagnostics": {
       "api": {
@@ -66,7 +66,7 @@
             "Κ18"
           ]
         },
-        "domestic_records": 20,
+        "domestic_records": 18,
         "sample_titles": [
           "Ε3 Open 46η (Ε)",
           "Ε3 Open 46η (Α)",
@@ -83,72 +83,6 @@
     }
   },
   "tournaments": [
-    {
-      "id": "eefoa-3748",
-      "level": "E2",
-      "title": "Ε2 5ο 43η (Β)",
-      "categories": [
-        "Α12",
-        "Α14",
-        "Α16",
-        "Α18",
-        "Κ12",
-        "Κ14",
-        "Κ16",
-        "Κ18"
-      ],
-      "union": "Β΄ Ένωση",
-      "unions": [
-        "Β΄ Ένωση"
-      ],
-      "week": 43,
-      "start": "2026-10-24",
-      "end": "2026-10-25",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΟΑ ΚΟΥΦΑΛΙΩΝ",
-      "city": "",
-      "lat": null,
-      "lon": null,
-      "registration_deadline": "2026-10-15T15:00+03:00",
-      "payment_deadline": "2026-10-19T15:00+03:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
-    {
-      "id": "eefoa-3749",
-      "level": "E2",
-      "title": "Ε2 5ο 43η (Ζ)",
-      "categories": [
-        "Α12",
-        "Α14",
-        "Α16",
-        "Κ12",
-        "Κ14",
-        "Κ16"
-      ],
-      "union": "Ζ΄ Ένωση",
-      "unions": [
-        "Ζ΄ Ένωση"
-      ],
-      "week": 43,
-      "start": "2026-10-24",
-      "end": "2026-10-25",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΗΡΑΚΛΕΙΟ ΟΑΑ",
-      "city": "",
-      "lat": null,
-      "lon": null,
-      "registration_deadline": "2026-10-15T15:00+03:00",
-      "payment_deadline": "2026-10-19T15:00+03:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
     {
       "id": "e3-2026-w44-55a3431328d7",
       "level": "E3",
