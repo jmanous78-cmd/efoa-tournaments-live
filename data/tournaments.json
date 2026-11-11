@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-11-11T16:27:48+02:00",
+    "updated_at": "2026-11-11T23:59:07+02:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -69,15 +69,15 @@
         "domestic_records": 19,
         "sample_titles": [
           "Ε3 Open 48η (ΙΑ)",
-          "Ε3 Open 46η (Ε)",
           "Ε3 Open 46η (Α)",
           "Ε3 Open 46η (Β)",
           "Ε3 Open 46η (ΣΤ)",
           "Ε3 Open 46η (Δ)",
+          "Ε3 Open 46η (Ε)",
           "Ε3 Open 46η (Η)",
           "Ε3 Open 46η (Θ)",
-          "Ε3 Open 45η (Ζ)",
-          "Ε3 Open 45η (Δ)"
+          "Ε3 Open 45η (Ε)",
+          "Ε3 Open 45η (ΣΤ)"
         ]
       }
     }
