@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-11-14T21:56:53+02:00",
+    "updated_at": "2026-11-15T15:58:45+02:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -13,8 +13,8 @@
     "counts": {
       "e3": 13,
       "e1e2": 0,
-      "eefoa": 18,
-      "total": 18
+      "eefoa": 15,
+      "total": 15
     },
     "eefoa_diagnostics": {
       "api": {
@@ -66,7 +66,7 @@
             "Κ18"
           ]
         },
-        "domestic_records": 18,
+        "domestic_records": 15,
         "sample_titles": [
           "Ε3 Open 48η (Θ)",
           "Ε3 Open 48η (ΙΑ)",
@@ -83,94 +83,6 @@
     }
   },
   "tournaments": [
-    {
-      "id": "eefoa-3757",
-      "level": "E3",
-      "title": "Ε3 Open 44η (Α)",
-      "categories": [
-        "Α14",
-        "Κ14"
-      ],
-      "union": "Α΄ Ένωση",
-      "unions": [
-        "Α΄ Ένωση"
-      ],
-      "week": 44,
-      "start": "2026-10-31",
-      "end": "2026-11-01",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΟΑ ΞΑΝΘΗΣ",
-      "city": "",
-      "lat": null,
-      "lon": null,
-      "registration_deadline": "2026-10-27T15:00+02:00",
-      "payment_deadline": "2026-10-28T15:00+02:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
-    {
-      "id": "eefoa-3751",
-      "level": "E3",
-      "title": "Ε3 Open 44η (Β) - ΑΚΥΡΟ",
-      "categories": [
-        "Α12",
-        "Α16",
-        "Κ12",
-        "Κ16"
-      ],
-      "union": "Β΄ Ένωση",
-      "unions": [
-        "Β΄ Ένωση"
-      ],
-      "week": 44,
-      "start": "2026-10-31",
-      "end": "2026-11-01",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΓΣ ΕΛΕΥΘ ΚΟΡΔ ΑΡΓΟΝΑΥΤΕΣ",
-      "city": "",
-      "lat": null,
-      "lon": null,
-      "registration_deadline": "2026-10-27T15:00+02:00",
-      "payment_deadline": "2026-10-28T15:00+02:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
-    {
-      "id": "eefoa-3750",
-      "level": "E3",
-      "title": "Ε3 Open 44η (Δ) - ΑΚΥΡΟ",
-      "categories": [
-        "Α12",
-        "Α16",
-        "Κ12",
-        "Κ16"
-      ],
-      "union": "Δ΄ Ένωση",
-      "unions": [
-        "Δ΄ Ένωση"
-      ],
-      "week": 44,
-      "start": "2026-10-31",
-      "end": "2026-11-01",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΟΑ ΙΩΑΝΝΙΝΩΝ",
-      "city": "",
-      "lat": null,
-      "lon": null,
-      "registration_deadline": "2026-10-27T15:00+02:00",
-      "payment_deadline": "2026-10-28T15:00+02:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
     {
       "id": "e3-2026-w45-8533bb690772",
       "level": "E3",
