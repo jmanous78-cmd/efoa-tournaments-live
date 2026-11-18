@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-11-17T18:04:44+02:00",
+    "updated_at": "2026-11-18T17:43:43+02:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -13,8 +13,8 @@
     "counts": {
       "e3": 7,
       "e1e2": 0,
-      "eefoa": 17,
-      "total": 16
+      "eefoa": 18,
+      "total": 17
     },
     "eefoa_diagnostics": {
       "api": {
@@ -32,7 +32,7 @@
           {
             "current": "0",
             "status": 200,
-            "count": 1187
+            "count": 1199
           }
         ],
         "chosen_current": "0",
@@ -66,18 +66,18 @@
             "Κ18"
           ]
         },
-        "domestic_records": 17,
+        "domestic_records": 18,
         "sample_titles": [
           "Ε3 Open 48η (Α)",
           "Ε3 Open 48η (ΣΤ)",
+          "Ε3 Open 48η (Ε)",
           "Ε3 Open 48η (ΙΑ)",
           "Ε3 Open 48η (Θ)",
           "Ε3 Open 46η (Α)",
           "Ε3 Open 46η (Β)",
           "Ε3 Open 46η (ΣΤ)",
           "Ε3 Open 46η (Δ)",
-          "Ε3 Open 46η (Ε)",
-          "Ε3 Open 46η (Η)"
+          "Ε3 Open 46η (Ε)"
         ]
       }
     }
@@ -570,6 +570,38 @@
       "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
       "source": "e-efoa-api"
+    },
+    {
+      "id": "eefoa-3804",
+      "level": "E3",
+      "title": "Ε3 Open 48η (Ε)",
+      "categories": [
+        "Α12",
+        "Α16",
+        "Κ12",
+        "Κ16"
+      ],
+      "union": "Ε΄ Ένωση",
+      "unions": [
+        "Ε΄ Ένωση"
+      ],
+      "week": 48,
+      "start": "2026-11-28",
+      "end": "2026-11-29",
+      "date_precision": "eefoa-start/week-end",
+      "venue": "ΑΣ ΑΝΤΙΣΦΑΙΡΙΣΗ κ ΖΩΗ",
+      "city": "",
+      "lat": null,
+      "lon": null,
+      "registration_deadline": "2026-11-24T15:00+02:00",
+      "payment_deadline": "2026-11-25T15:00+02:00",
+      "status": "confirmed",
+      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "proclamation_url": null,
+      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
+      "source": "e-efoa-api",
+      "registration_deadline_source": "competition-rules",
+      "payment_deadline_source": "competition-rules"
     },
     {
       "id": "eefoa-3803",
