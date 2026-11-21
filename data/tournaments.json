@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-11-20T17:30:18+02:00",
+    "updated_at": "2026-11-21T16:42:47+02:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -13,8 +13,8 @@
     "counts": {
       "e3": 7,
       "e1e2": 0,
-      "eefoa": 19,
-      "total": 18
+      "eefoa": 17,
+      "total": 17
     },
     "eefoa_diagnostics": {
       "api": {
@@ -66,7 +66,7 @@
             "Κ18"
           ]
         },
-        "domestic_records": 19,
+        "domestic_records": 17,
         "sample_titles": [
           "Ε3 Open 49η (Ζ)",
           "Ε3 Open 48η (Α)",
@@ -83,36 +83,6 @@
     }
   },
   "tournaments": [
-    {
-      "id": "eefoa-3762",
-      "level": "E3",
-      "title": "Ε3 Open 45η (Η)",
-      "categories": [
-        "Α12",
-        "Α16",
-        "Κ12",
-        "Κ16"
-      ],
-      "union": "Η΄ Ένωση",
-      "unions": [
-        "Η΄ Ένωση"
-      ],
-      "week": 45,
-      "start": "2026-11-06",
-      "end": "2026-11-08",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΟΑ ΑΡΙΣΤΟΤΕΛΗΣ",
-      "city": "",
-      "lat": null,
-      "lon": null,
-      "registration_deadline": "2026-11-03T15:00+02:00",
-      "payment_deadline": "2026-11-04T15:00+02:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
     {
       "id": "eefoa-3767",
       "level": "E3",
@@ -147,10 +117,8 @@
       "title": "Ε3 Open 45η (Ε)",
       "categories": [
         "Α12",
-        "Α14",
         "Α16",
         "Κ12",
-        "Κ14",
         "Κ16"
       ],
       "union": "Ε΄ Ένωση",
@@ -161,7 +129,7 @@
       "start": "2026-11-07",
       "end": "2026-11-08",
       "date_precision": "eefoa-start/week-end",
-      "venue": "ΑΟΑ ΗΛΙΟΥΠΟΛΗΣ",
+      "venue": "ΟΑ ΝΙΚΑΙΑ ΛΑΡΙΣΑΣ",
       "city": "",
       "lat": null,
       "lon": null,
@@ -171,10 +139,7 @@
       "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
       "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api",
-      "sources": [
-        "https://e-efoa.gr/admin/tournamentsview/list"
-      ]
+      "source": "e-efoa-api"
     },
     {
       "id": "eefoa-3765",
@@ -655,9 +620,7 @@
       "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
       "proclamation_url": null,
       "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api",
-      "registration_deadline_source": "competition-rules",
-      "payment_deadline_source": "competition-rules"
+      "source": "e-efoa-api"
     }
   ]
 }
