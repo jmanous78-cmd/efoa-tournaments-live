@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-11-21T22:54:59+02:00",
+    "updated_at": "2026-11-22T16:38:34+02:00",
     "source_status": "ok",
     "errors": [],
     "sources": [
@@ -13,8 +13,8 @@
     "counts": {
       "e3": 7,
       "e1e2": 0,
-      "eefoa": 17,
-      "total": 17
+      "eefoa": 13,
+      "total": 13
     },
     "eefoa_diagnostics": {
       "api": {
@@ -66,7 +66,7 @@
             "Κ18"
           ]
         },
-        "domestic_records": 17,
+        "domestic_records": 13,
         "sample_titles": [
           "Ε3 Open 49η (Ζ)",
           "Ε3 Open 48η (Α)",
@@ -83,122 +83,6 @@
     }
   },
   "tournaments": [
-    {
-      "id": "eefoa-3767",
-      "level": "E3",
-      "title": "Ε3 Open 45η (Δ)",
-      "categories": [
-        "Α14",
-        "Κ14"
-      ],
-      "union": "Δ΄ Ένωση",
-      "unions": [
-        "Δ΄ Ένωση"
-      ],
-      "week": 45,
-      "start": "2026-11-07",
-      "end": "2026-11-08",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΟΑ ΙΩΑΝΝΙΝΩΝ",
-      "city": "",
-      "lat": null,
-      "lon": null,
-      "registration_deadline": "2026-11-03T15:00+02:00",
-      "payment_deadline": "2026-11-04T15:00+02:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
-    {
-      "id": "eefoa-3754",
-      "level": "E3",
-      "title": "Ε3 Open 45η (Ε)",
-      "categories": [
-        "Α12",
-        "Α16",
-        "Κ12",
-        "Κ16"
-      ],
-      "union": "Ε΄ Ένωση",
-      "unions": [
-        "Ε΄ Ένωση"
-      ],
-      "week": 45,
-      "start": "2026-11-07",
-      "end": "2026-11-08",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΟΑ ΝΙΚΑΙΑ ΛΑΡΙΣΑΣ",
-      "city": "",
-      "lat": null,
-      "lon": null,
-      "registration_deadline": "2026-11-03T15:00+02:00",
-      "payment_deadline": "2026-11-04T15:00+02:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
-    {
-      "id": "eefoa-3765",
-      "level": "E3",
-      "title": "Ε3 Open 45η (Ζ)",
-      "categories": [
-        "Α12",
-        "Α16",
-        "Κ12",
-        "Κ16"
-      ],
-      "union": "Ζ΄ Ένωση",
-      "unions": [
-        "Ζ΄ Ένωση"
-      ],
-      "week": 45,
-      "start": "2026-11-07",
-      "end": "2026-11-08",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΟΑ ΡΕΘΥΜΝΟΥ",
-      "city": "",
-      "lat": null,
-      "lon": null,
-      "registration_deadline": "2026-11-03T15:00+02:00",
-      "payment_deadline": "2026-11-04T15:00+02:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
-    {
-      "id": "eefoa-3770",
-      "level": "E3",
-      "title": "Ε3 Open 45η (ΣΤ)",
-      "categories": [
-        "Α14",
-        "Κ14"
-      ],
-      "union": "ΣΤ΄ Ένωση",
-      "unions": [
-        "ΣΤ΄ Ένωση"
-      ],
-      "week": 45,
-      "start": "2026-11-07",
-      "end": "2026-11-08",
-      "date_precision": "eefoa-start/week-end",
-      "venue": "ΡΗΓΑΣ ΑΟΑ ΑΡΓΟΛΙΔΑΣ",
-      "city": "",
-      "lat": null,
-      "lon": null,
-      "registration_deadline": "2026-11-03T15:00+02:00",
-      "payment_deadline": "2026-11-04T15:00+02:00",
-      "status": "confirmed",
-      "source_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "proclamation_url": null,
-      "registration_url": "https://e-efoa.gr/admin/tournamentsview/list",
-      "source": "e-efoa-api"
-    },
     {
       "id": "e3-2026-w46-a748ba358641",
       "level": "E3",
